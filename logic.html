@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Page Title</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script>
+  function logOddNumbers(limit) {
+    var number = 1;
+    while (number <= limit) {
+      console.log(number);
+      number += 2;
+    }
+  }
+
+  // logOddNumbers(19);
+
+  function unlogEvenNumbers(limit) {
+    var number = 1;
+    while (number <= limit) {
+      if (number % 2 === 0) {
+        number++;
+        continue;
+      }
+      console.log(number);
+      number++;
+    }
+  }
+  // unlogEvenNumbers(19);
+
+  // Write a function that logs the integers from 1 to 100 (inclusive) that are multiples
+  // of either 3 or 5. If the number is divisible by both 3 and 5,
+  // append an "!" to the number.
+  // console.log("===============");
+
+  function multiplesOfThreeAndFive(beginning, end) {
+    var i = beginning;
+    for (i; i < end + 1; i++) {
+      if (i % 3 === 0 && i % 5 === 0) {
+        console.log(String(i) + '!');
+      } else if (i % 3 === 0 || i % 5 === 0) {
+        console.log(i);
+      } else {
+        continue;
+      }
+    }
+  }
+
+  // multiplesOfThreeAndFive(1, 100);
+  // multiplesOfThreeAndFive(16, 31);
+
+  function logMultiples(number) {
+    // on crée une boucle entre 0 et 100
+    // on vérifie à chaque nombre si c'est un multiple de number
+    // on logge si c'est le cas
+    var i = Math.floor(100 / number) * number;
+    var limit = 0;
+    for (i; i > limit; i -= number) {
+      if (i % 2 === 1) {
+        console.log(i);
+      }
+    }
+  }
+  // console.log("===============");
+
+  // logMultiples(17);
+  // output (5x, 3x and 1x)
+  // 85
+  // 51
+  // 17
+
+  // logMultiples(21);
+  // output (3x and 1x)
+  // 63
+  // 21
+  // 
+  // console.log("========= fizzbuzz ==========")
+
+  function fizzbuzz() {
+    var i = 1;
+    var message;
+    for (i; i < 101; i++) {
+      message = '';
+      if (i % 3 === 0) {
+        message += 'fizz';
+      }
+      if (i % 5 === 0) {
+        message += 'buzz';
+      }
+      console.log(message || i);
+    }
+  }
+
+  // fizzbuzz();
+
+  // console.log('-------- is prime ------')
+
+  function isPrime(number) {
+    if (number < 2) return false;
+    if (number === 2) return true;
+    if (number % 2 === 0) return true;
+
+    var i = 3;
+    for (i; i < number; i += 2) {
+      if (number % i === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  // isPrime(1); // false
+  // isPrime(2); // true
+  // isPrime(3); // true
+  // isPrime(43); // true
+  // isPrime(55); // false
+  // isPrime(0); // false
+
+  // console.log('-------- xor ------------')
+
+  function isXor(bool_1, bool_2) {
+    if ((!!bool_1 == true && !!bool_2 == false) ||
+      (!!bool_1 == false && !!bool_2 == true)) {
+      return true;
+    }
+    return false;
+  }
+
+  // console.log(isXor(false, true)); // true
+  // console.log(isXor(true, false)); // true
+  // console.log(isXor(false, false)); // false
+  // console.log(isXor(true, true)); // false
+
+
+  // console.log(isXor(false, 3)); // true
+  // console.log(isXor('a', undefined)); // true
+  // console.log(isXor(null, '')); // false
+  // console.log(isXor('2', 23)); // false
+
+  // console.log('--------- password ---------');
+
+  function guessPassword() {
+    var password = 'password'
+    var attempt;
+    var guesses = 0;
+    while (guesses < 3) {
+      attempt = prompt('What is the password?');
+      if (attempt === password) {
+        return console.log('you are connected.')
+      } else {
+        guesses++;
+      }
+    }
+    return console.log('Too many attempts, you lose.');
+  }
+
+  // guessPassword();
+
+
+  // console.log('--------- letter grades --------')
+
+  function sum(numbers) {
+    total = 0;
+    numbers.forEach(function(item) {
+      total += item;
+    });
+    return total;
+  }
+
+  function average(numbers) {
+    total = sum(numbers);
+    return total / numbers.length;
+  }
+
+  function letterGrade(notes_number) {
+    //  on itère pour récupérer les 3 variables dans un array
+    //  on fait la somme des 3 variables pour faire la moyenne
+    //  on associe par paliers à des notes
+    prompts = 0;
+    var grades = [];
+    var message;
+    while (prompts < notes_number) {
+      note = prompt('Enter grade');
+      grades.push(Number(note));
+      prompts++;
+    }
+    average = average(grades);
+
+    if (average >= 90) {
+      message = 'A';
+    } else if (average >= 70) {
+      message = 'B';
+    } else if (average >= 50) {
+      message = 'C';
+    } else {
+      message = 'F'
+    }
+    console.log(message);
+  }
+
+  // letterGrade(4);
+  // prompts to get the 3 scores
+  // Enter score 1: 90
+  // Enter score 2: 50
+  // Enter score 3: 78
+
+  // log to the console
+  // Based on the average of your 3 scores your letter grade is "B".
+
+  // console.log('------- gcd ---------');
+
+  function gcd(numbers) {
+    var tested_numbers = numbers.splice(0, 2);
+    var num1;
+    var num2;
+    var temp;
+    if (tested_numbers[0] > tested_numbers[1]) {
+      num1 = tested_numbers[0];
+      num2 = tested_numbers[1];
+    } else {
+      num1 = tested_numbers[1];
+      num2 = tested_numbers[0];
+    }
+
+    while (num2 !== 0) {
+      temp = num2;
+      num2 = num1 % num2;
+      num1 = temp;
+    }
+    if (numbers.length > 0) {
+      numbers.push(num1);
+      return gcd(numbers);
+    }
+
+    return num1;
+  }
+
+  // console.log(gcd([12, 4]));
+  // console.log(gcd([12, 4, 16, 8]));
+  // console.log(gcd([30, 90, 63]));
+  // console.log(gcd(12, 4)); // 4
+  // console.log(gcd(15, 10)); // 5
+  // console.log(gcd(9, 2)); // 1
+
+  // console.log("------------ checkGoldbach ---------");
+
+  function checkGoldbach(limit) {
+
+    var pairs = [];
+    var x;
+    var temp_array;
+    if (limit < 4) {
+      return null;
+    }
+    if (limit == 4) {
+      return [2, 2];
+    }
+
+    for (var i = 3; i < limit; i += 2) {
+      x = limit - i;
+      if (isPrime(x) && isPrime(i)) {
+        temp_array = [x, i]
+        pairs.push(temp_array);
+      }
+      i += 2;
+    }
+    return pairs;
+  } // end of function
+
+  // console.log(checkGoldbach(3));
+  // console.log(checkGoldbach(4));
+  // console.log(checkGoldbach(12));
+  // console.log(checkGoldbach(100));
+
+  function generatePattern(max) {
+    var result;
+    var temp_num;
+    // on instancie une variable à 1
+    // on pushe i dans un tableau, puis (max - i) fois '*' dans le tableau
+    // on transforme le tableau en String
+    // puis on le console.log
+    // on boucle avec for tant que c'est inférieur à max
+
+    for (var i = 1; i <= max; i++) {
+      result = '';
+      for (var j = 1; j <= i; j++) {
+        result += j;
+      } // boucle pour les chiffres
+
+      var k = i + 1;
+      for (k; k <= max; k++) {
+        if (k < 10) {
+          result += '*';
+        } else {
+          result += '**';
+        }
+
+      } // boucle pour les *
+      console.log(result);
+    } // boucle externe
+
+  } // fin méthode
+
+  // generatePattern(7);
+  // generatePattern(11);
+  // generatePattern(19);
+
+
+  function indexesOf(firstString, secondString) {
+    var i = 0;
+    var j = 0;
+    var k;
+    var result = [];
+    while (i < firstString.length) {
+      if (firstString[i] === secondString[j]) {
+        while (j < secondString.length) {
+          k = i + j;
+          var letterInFirstString = firstString[k];
+          var letterInSecondString = secondString[j];
+          if (letterInFirstString !== letterInSecondString) {
+            return -1;
+          }
+          j++;
+        }
+        result.push(i);
+      }
+      j = 0;
+      i++;
+    }
+    return result;
+  }
+
+  // console.log(indexesOf('Some strings', 's'));
+
+  function indexOf(firstString, secondString) {
+    var result = indexesOf(firstString, secondString);
+    if (result === -1) {
+      return result
+    } else {
+      return result[0];
+    }
+  } // fin méthode
+
+  function lastIndexOf(firstString, secondString) {
+    var result = indexesOf(firstString, secondString);
+    var last_index = result.length - 1;
+    if (result === -1) {
+      return result
+    } else {
+      return result[last_index];
+    }
+  }
+
+  // console.log(indexOf('Some strings', 's')); // 5
+  // console.log(indexOf('Blue Whale', 'Whale')); // 5
+  // console.log(indexOf('Blue Whale', 'Blute')); // -1
+  // console.log(indexOf('Blue Whale', 'leB')); // -1
+
+  // console.log(lastIndexOf('Some strings', 's')); // 11
+  // console.log(lastIndexOf('Blue Whale, Killer Whale', 'Whale')); // 19
+  // console.log(lastIndexOf('Blue Whale, Killer Whale', 'all')); // -1
+
+
+
+
+  function trim(string) {
+    // create empty string for result
+    // iterate on letters
+    // break when encounters a letter;
+    // keep the index
+
+    // iterate on letters from the end
+    // break when encounters a letter;
+    // keep the index
+
+    // add items from index A to index B to result string
+
+    var index = 0;
+    var reverse_index = string.length - 1;
+    var beginning;
+    var ending;
+    var space = ' ';
+    var result = '';
+
+    while (index < string.length) {
+      if (string[index] !== space) {
+        beginning = index;
+        break;
+      }
+      index++;
+    } // end while
+
+    while (reverse_index > 0) {
+      if (string[reverse_index] !== space) {
+        ending = reverse_index;
+        break;
+      }
+      reverse_index--;
+    } // end while
+
+    while (beginning <= ending) {
+      result += string[beginning];
+      beginning++;
+    }
+    console.log(result.length);
+    return result;
+  }
+
+  // console.log(trim('  abc  ')); // "abc"
+  // console.log(trim('abc   ')); // "abc"
+  // console.log(trim(' ab c')); // "ab c"
+  // console.log(trim(' a b  c')); // "a b  c"
+  // console.log(trim('      ')); // ""
+  // console.log(trim('')); // ""
+
+  function splitString(string, delimiter) {
+    // créer array de resultat
+    // créer string vide
+    // itérer sur string arg
+    // tant que ne rencontre pas le delimiter
+    // ajouter lettre au string vide
+    // si on rencontre le delimiter
+    // on pousse le string dans l'array
+    // on revide le string
+    // 
+    // une fois qu'on a l'array, on itère dessus 
+    // et on console.log chaque string
+    if (delimiter === null) {
+      throw new Error("No delimiter");
+    }
+
+    var result = [];
+    var split = '';
+    var index = 0;
+    while (index < string.length) {
+
+      if (delimiter === '') {
+        result.push(string[index]);
+      } else {
+        if (string[index] === delimiter) {
+          result.push(split);
+          split = '';
+        } else {
+          split += string[index];
+        }
+      }
+      index++;
+    } // fin while
+    if (split !== '') {
+      result.push(split);
+    }
+
+    console.log(result);
+    result.forEach(function(substring) {
+      console.log(substring);
+    }) // fin each  
+    console.log('--- end of method ----');
+
+    // 🤓 prendre en compte les cas particuliers
+
+  } // fin methode
+
+  // splitString('abc,123,hello world', ',');
+  // logs:
+  // abc
+  // 123
+  // hello world
+
+  // splitString('hello'); 
+  // logs:
+  // ERROR: No delimiter ✅
+
+  // splitString('hello', '');
+  // logs:
+  // h
+  // e
+  // l
+  // l
+  // o
+
+  // splitString('hello', ';');
+  // logs:
+  // hello
+
+  // splitString(';hello;', ';');
+  // logs:
+  //  (this is a blank line)
+  // hello
+
+  function repeat(string, times) {
+    if (times === 0) return '';
+    if (times < 0 || !!times === false || isNaN(Number(times))) return undefined;
+
+    var i = 0;
+    var result = '';
+    while (i <= times) {
+      result += (string);
+      i++;
+    }
+    return result;
+  }
+
+  // console.log(repeat('abc', 1));       // "abc"
+  // console.log(repeat('abc', 2));       // "abcabc"
+  // console.log(repeat('abc', -1));      // undefined
+  // console.log(repeat('abc', 0));       // ""
+  // console.log(repeat('abc', 'a'));     // undefined
+  // console.log(repeat('abc', false));   // undefined
+  // console.log(repeat('abc', null));    // undefined
+  // console.log(repeat('abc', '  '));    // undefined
+
+  function startsWith(string, searchString) {
+    // calculer la longueur du searchString
+    // assigner une variable à 0
+    // créer une variable string vide
+    // boucler sur la premiere string jusqu'à atteindre la longueur du searchString
+    // ajouter chaque lettre au string vide
+    // si le string est égal au searchstring alors on retourne true
+
+    var i = 0;
+    var substring = '';
+    while (i < searchString.length) {
+      substring += string[i];
+      i++;
+    }
+
+    return substring === searchString;
+  }
+
+  // var str = 'We put comprehension and mastery above all else';
+  // console.log(startsWith(str, 'We')); // true
+  // console.log(startsWith(str, 'We put')); // true
+  // console.log(startsWith(str, '')); // true
+  // console.log(startsWith(str, 'put')); // false
+
+  // var longerString = 'We put comprehension and mastery above all else!';
+  // console.log(startsWith(str, longerString)); // false
+
+  var string = 'A';
+  asciiNumeric = string.charCodeAt(0); // 65
+  asciiNumeric += 32;
+  string = String.fromCharCode(asciiNumeric); // "a", converted to lowercase
+
+  function toLowerCase(string) {
+    // var string = 'A';
+    // asciiNumeric = string.charCodeAt(0); // 65
+    // asciiNumeric += 32;
+    // string = String.fromCharCode(asciiNumeric); // "a", converted to lowercase
+
+    var result = '';
+    var i = 0;
+    var position;
+    while (i < string.length) {
+      position = string.charCodeAt(i);
+      if (position > 64 && position < 92) {
+        position += 32;
+        result += String.fromCharCode(position);
+      } else {
+        result += string[i];
+      }
+      i++
+    }
+
+    return result;
+    // créer un nouveau string
+    // itérer sur le string
+    // vérifier à chaque caractère si c'est uppercase (donc entre 65 et 91)
+    // si oui, alors on ajoute + 32
+    // sinon on ajoute au string de résultat
+  }
+
+  // console.log(toLowerCase('ALPHABET')); // "alphabet"
+  // console.log(toLowerCase('123')); // "123"
+  // console.log(toLowerCase('abcDEF')); // "abcdef"
+  // console.log(toLowerCase('ZEabn'));
+  // 
+  // 
+  function substr(string, start, length) {
+    // iterate on string from start
+    // put it in a new string
+    // stop at start + length
+    // return
+    var stop;
+    var result = '';
+
+    if (start < 0) {
+      start += string.length;
+    }
+    var stop = start + length - 1;
+
+    while (start <= stop) {
+      result += string[start];
+      start++;
+      if (stop > string.length) {
+        break;
+      }
+    }
+    return result;
+  }
+
+  var string = 'hello world';
+
+  // console.log(substr(string, 2, 4)); // "llo "
+  // console.log(substr(string, -3, 2)); // "rl"
+  // console.log(substr(string, 8, 20)); // "rld"
+  // console.log(substr(string, 0, -20)); // ""
+  // console.log(substr(string, 0, 0)); // ""
+  // 
+  function validNumber(number) {
+    if (number < 0 || isNaN(Number(number))) return 0;
+    return number;
+  }
+
+  function validEnd(end, str) {
+    if (end === undefined || end > str.length) {
+      return str.length;
+    } else {
+      return validNumber(end);
+    }
+  }
+
+  function validStart(start, str) {
+    if (start > str.length) {
+      return str.length;
+    } else {
+      return validNumber(start);
+    }
+  }
+
+  function substring(string, start, end) {
+    start = validStart(start, string);
+    end = validEnd(end, string);
+
+    if (start === end) return '';
+
+    if (start < end) {
+      length = end - start;
+    }
+
+    if (start > end) {
+      length = start - end;
+      start = end;
+    }
+    return substr(string, start, length);
+  } // fin méthode
+
+  var string = 'hello world';
+
+  console.log(substring(string, 2, 4)); // "ll"
+  console.log(substring(string, 4, 2)); // "ll"
+  console.log(substring(string, 0, -1)); // ""
+  console.log(substring(string, 2)); // "llo world"
+  console.log(substring(string, 'a')); // "hello world"
+  console.log(substring(string, 8, 20)); // "rld"
+  </script>
+</head>
+
+<body>
+  <h1>Hello, world!</h1>
+</body>
+
+</html>

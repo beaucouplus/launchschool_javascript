@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Rot 13</title>
+  <script>
+
+  function CypherFromAscii(ascii_num) {
+    ascii_num += 13;
+    if ((ascii_num > 91 && ascii_num < 104) || ascii_num > 122) {
+      ascii_num -= 26
+    }
+    return String.fromCharCode(ascii_num);
+  }
+
+  function rot13(string) {
+    var cyphered_string = '';
+    var ascii_num;
+
+    for (var i = 0; i < string.length; i++) {
+      ascii_num = string.charCodeAt(i);
+      if (ascii_num < 65 || ascii_num > 122) {
+        cyphered_string += string[i];
+      } else {
+        cyphered_string += CypherFromAscii(ascii_num);
+      }
+    }
+
+    return cyphered_string;
+  }
+
+  console.log(rot13('Teachers open the door, but you must enter by yourself.'));
+  console.log(rot13(rot13('Teachers open the door, but you must enter by yourself.')));
+  </script>
+</head>
+
+<body>
+  <h1>Rot13</h1>
+</body>
+
+</html>

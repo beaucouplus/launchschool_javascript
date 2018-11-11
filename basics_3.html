@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Page Title</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script>
+  // Set a variable, apples, to 3. Set a second variable, bananas, to 5.
+  //  Write a conditional using == that checks whether apples is equal to bananas.
+  //  Log a message if true.
+
+  var apples = 3;
+  var bananas = 5;
+  var bananas = "3";
+  if (apples === bananas) {
+    console.log("apples equal bananas");
+
+  } else {
+    if (apples == bananas) {
+      console.log("not the same type babe");
+    } else {
+      console.log("nope, doesn't work");
+    }
+  };
+
+  console.log("===========");
+  apples = 3;
+  bananas = 3;
+  var areEqual = apples === bananas;
+  console.log(areEqual);
+
+  console.log("============");
+  bananas = undefined;
+
+  var eitherOr = apples || bananas;
+  console.log(eitherOr);
+  bananas = 1;
+  console.log(eitherOr);
+  eitherOr = bananas || apples;
+  console.log(eitherOr);
+
+  console.log("==============");
+  // Create two new variables, lastName and familyMessage.
+  // Set lastName to your last name, then use a ternary that checks whether 
+  // lastName is equal to your last name to set familyMessage to 
+  // either "You're part of the family!" or "You're not family."
+
+  var lastName = "Souillat";
+  var familyMessage = (lastName === "Souillat") ? "You're part of the family" : "You're not family";
+  console.log(familyMessage);
+  </script>
+</head>
+
+<body>
+  <h1>Hello, world!</h1>
+</body>
+
+</html>

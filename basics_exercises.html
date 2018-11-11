@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Page Title</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script>
+  // var sentence = prompt("Type a sentence");
+  // var sentenceWithoutSpaces = sentence.replace(/[a-zA-Z]/g, "");
+  // console.log(sentenceWithoutSpaces);
+  // console.log(sentence.length);
+  // console.log(sentenceWithoutSpaces.length);
+  function stringToInteger(argument) {
+    var counter = 0;
+    var power = argument.length - 1
+    var integer = 0;
+    var digit;
+
+    while (counter < argument.length) {
+      digit = argument[counter] * 1;
+      integer += digit * 10 ** power;
+      power -= 1;
+      counter++;
+    };
+    return integer;
+  };
+
+  function signedStringToInteger(argument) {
+    if (argument[0] == "-") {
+      return -stringToInteger(argument.substring(1));
+    } else if (argument[0] == "+") {
+      return stringToInteger(argument.substring(1));
+    } else {
+      return stringToInteger(argument);
+    };
+  };
+
+  console.log(stringToInteger('4321')); // 4321
+  console.log(stringToInteger('570')); // 570
+  console.log(signedStringToInteger('-4321'));
+  console.log(signedStringToInteger('+570')); // 570
+  console.log(signedStringToInteger('24000')); // 570
+
+  function integerToString(argument) {
+    digits = [];
+    if (argument === 0) {
+      return "0";
+    }
+    while (true) {
+      digits.unshift(argument % 10);
+      argument = (argument - (argument % 10)) / 10;
+      if (argument < 10) {
+        digits.unshift(argument);
+        break;
+      };
+    };
+    return digits.join('');
+  };
+
+  console.log(integerToString(4321)); // "4321"
+  console.log(integerToString(0)); // "0"
+  console.log(integerToString(5000)); // "5000"
+
+  function signedIntegerToString(number) {
+    if (number < 0) {
+      return "-" + integerToString(Math.abs(number));
+    } else if (number > 0) {
+      return "+" + integerToString(number);
+    } else {
+      return "0";
+    };
+  };
+
+  console.log(signedIntegerToString(4321)); // "+4321"
+  console.log(signedIntegerToString(-123)); // "-123"
+  console.log(signedIntegerToString(0)); // "0"
+  </script>
+</head>
+
+<body>
+  <h1>Hello, world!</h1>
+</body>
+
+</html>
