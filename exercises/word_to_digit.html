@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>exercises</title>
+  <script>
+  // Write a function that takes a sentence string as an argument,
+  // and returns that string with every occurrence of a 
+  // "number word" — 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine' — 
+  // converted to its corresponding digit character.
+
+  // Example:
+
+  function wordToDigit(sentence) {
+    // split sentence
+
+    // iterate over array. If element is included in zero > nine, return the corresponding number
+    // an object would be a good idea
+    // I should map it
+    // 🧠 i have to find a way to handle the punctuation > b
+    var digits = {
+      zero: 0,
+      one: 1,
+      two: 2,
+      three: 3,
+      four: 4,
+      five: 5,
+      six: 6,
+      seven: 7,
+      eight: 8,
+      nine: 9,
+    }
+
+    var withDigits = function(word) {
+      if (Object.keys(digits).includes(word)) return digits[word];
+      return word;
+    }
+
+    return sentence.split(/\b/).map(withDigits).join('');
+
+  }
+
+
+  console.log(wordToDigit('Please call me at five five five one two three four. Thanks.'));
+  // "Please call me at 5 5 5 1 2 3 4. Thanks."
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

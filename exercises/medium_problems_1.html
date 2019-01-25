@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>medium probs</title>
+  <script>
+  // Write a function that rotates an array by moving the first element 
+  // to the end of the array. Do not modify the original array.
+
+  // If the input is not an array, return undefined.
+  // If the input is an empty array, return an empty array.
+  // 
+  // RULES
+  // original array is not modified
+  // if input is not an array > undefined;
+  // if input empty array > undefined;
+
+  function rotateArray(array) {
+    if (!array || !Array.isArray(array)) return undefined;
+    if (array.length === 0) return [];
+
+    var newArray = array.slice(0);
+    firstItem = newArray.shift();
+    newArray.push(firstItem);
+    return newArray;
+  }
+
+  // console.log(rotateArray([7, 3, 5, 2, 9, 1])); // [3, 5, 2, 9, 1, 7]
+  // console.log(rotateArray(['a', 'b', 'c'])); // ["b", "c", "a"]
+  // console.log(rotateArray(['a'])); // ["a"]
+  // console.log(rotateArray([1, 'a', 3, 'c'])); // ["a", 3, "c", 1]
+  // console.log(rotateArray([{ a: 2 },
+  //   [1, 2], 3
+  // ])); // [[1, 2], 3, { a: 2 }]
+  // console.log(rotateArray([])); // []
+
+  // return `undefined` if the argument is not an array
+  // console.log(rotateArray()); // undefined
+  // console.log(rotateArray(1)); // undefined
+
+
+  // the input array is not mutated
+  var array = [1, 2, 3, 4];
+  rotateArray(array); // [2, 3, 4, 1]
+  array; // [1, 2, 3, 4]
+
+
+  // Write a function that rotates the last n digits of a number.
+  // For the rotation, rotate by one digit to the left, moving the first digit to the end.
+
+  // RULES
+  // la rotation met le dernier chiffre en premier, et décale les autres
+
+  // on crée un string à partir du nombre
+  // on crée un array à partir du string
+  // on crée un array qui comprend les X chiffres qui font partie de la rotation
+  // et là on applique un rotateArray
+  // on s'assure que les 2 arrays soient fusionnés.
+  // On recrée un string à partir de l'array
+  // on recrée un nombre à partir du string
+  function rotateRightmostDigits(number, section) {
+    var digits = String(number).split('');
+    var sliceIndex = digits.length - section;
+
+    var digitsToRotate = digits.slice(sliceIndex);
+
+    var rotatedDigits = rotateArray(digitsToRotate);
+
+    var finalArray = digits.slice(0, sliceIndex).concat(rotatedDigits);
+    return Number(finalArray.join(''));
+  }
+
+  // console.log(rotateRightmostDigits(735291, 1), 735291); // 735291
+  // console.log(rotateRightmostDigits(735291, 2), 735219); // 7352 19
+  // console.log(rotateRightmostDigits(735291, 3), 735912); // 735 912
+  // console.log(rotateRightmostDigits(735291, 4), 732915); // 73 2915
+  // console.log(rotateRightmostDigits(735291, 5), 752913); // 7 52913
+  // console.log(rotateRightmostDigits(735291, 6), 352917); // 3 52917
+
+  // Take the number 735291 and rotate it by one digit to the left, getting 352917.
+  // Next, keep the first digit fixed in place and rotate the remaining digits to get 329175.
+  // Keep the first two digits fixed in place and rotate again to get 321759. Keep the first three digits
+  // fixed in place and rotate again to get 321597.
+  // Finally, keep the first four digits fixed in place and rotate the final two digits to get 321579.
+  // The resulting number is called the maximum rotation of the original number.
+
+  // 1. 735291
+  // 2. 35291 7 
+  // 3. 3 29175
+  // 4. 32 1759
+  // 5. 321 597
+  // 6. 3215 79
+  
+  // RULES
+  // rotate by one.
+  // keep [0] and rotate the remaining array
+  // keep [0][1] and rotate
+  // ... [0][3] and rotate until the rotation happens on only 2 digits
+
+  // HOW TO
+  // create first number to rotate
+  // create a variable to keep the numbers fixed in place
+  // use rotaterightmostdigits on remaining number
+  // increment by 1
+
+  function maxRotation(number) {
+  var i;
+  for (i = String(number).length; i > 1; i -= 1) {
+    number = rotateRightmostDigits(number, i);
+  }
+
+  return number;
+}
+
+
+  console.log(maxRotation(735291), 321579); // 321579
+  console.log(maxRotation(3), 3); // 3
+  console.log(maxRotation(35), 53); // 53
+  console.log(maxRotation(105), 15); // 15 -- the leading zero gets dropped
+  console.log(maxRotation(8703529146), 7321609845); // 7321609845
+  </script>
+</head>
+
+<body>
+  <h1>medium probs</h1>
+</body>
+
+</html>

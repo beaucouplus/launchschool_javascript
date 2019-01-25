@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>vigenere</title>
+  <script>
+  function findLetter(charList, char, shift) {
+    var ALPHABET_SIZE = 26
+    var position = charList.indexOf(char) + shift;
+    if (position > ALPHABET_SIZE - 1) {
+      position = position - ALPHABET_SIZE;
+    }
+
+    return charList.charAt(position);
+  }
+
+  function encryptChar(char, shift) {
+    var UP_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var DOWN_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase();
+    if (!UP_ALPHA.includes(char) && !DOWN_ALPHA.includes(char)) return char;
+
+    return UP_ALPHA.includes(char) ? findLetter(UP_ALPHA, char, shift) : findLetter(DOWN_ALPHA, char, shift);
+  }
+
+  function caesarEncrypt(string, shift) {
+
+    var encrypted = function(char) {
+      return encryptChar(char, shift);
+    }
+
+    return string.split('').map(encrypted).join('');
+  }
+
+  //   plaintext: Pineapples don't go on pizzas!
+  // keyword: meat
+
+  // Applying the Vigenere Cipher for each alphabetic character:
+  // plaintext : Pine appl esdo ntgo onpi zzas
+  // shift     : meat meat meat meat meat meat
+  // ciphertext: Bmnx mtpe qwdh zxgh arpb ldal
+
+  // result: Bmnxmtpeqw dhz'x gh ar pbldal!
+
+  function toNumber(letter) {
+    var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return ALPHABET.indexOf(letter);
+  }
+
+  function incrementIndex(currentIndex, maximum) {
+    currentIndex += 1;
+    if (currentIndex > maximum - 1) return 0;
+    return currentIndex;
+  }
+
+  function isLetter(character) {
+    var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return ALPHABET.includes(character.toUpperCase());
+  }
+
+  function vigenere(string, keyword) {
+    // on itère sur le string
+    // à chaque lettre, on vérifie si c'est une lettre ou non
+    // on transforme : la transformation enregistre toujours la prochaine lettre à utiliser
+
+    // transformer les lettres en leur équivalent alphabetique
+
+    var toNumbers = function(letter) {
+      return toNumber(letter);
+    }
+
+    var keys = keyword.toUpperCase().split('').map(toNumbers);
+    var lastIndex = 0;
+
+    var encrypted = function(letter, index) {
+      var encryptedLetter = caesarEncrypt(letter, keys[lastIndex]);
+      if (isLetter(letter)) {
+        lastIndex = incrementIndex(lastIndex, keys.length);
+      }
+      return encryptedLetter;
+    }
+
+    return string.split('').map(encrypted).join('')
+
+
+  }
+
+  console.log(vigenere('a', 'a'));
+  console.log(vigenere('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'b'));
+  console.log(vigenere('a', 'b'));
+  console.log(vigenere('Pineapples don\'t go on pizzas!', 'aaaa'));
+  console.log("should be: Bmnxmtpeqw dhz'x gh ar pbldal! ----", vigenere('Pineapples don\'t go on pizzas!', 'meat'));
+  </script>
+</head>
+
+<body>
+  <h1>vigenere</h1>
+</body>
+
+</html>

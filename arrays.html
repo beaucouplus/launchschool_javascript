@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>arrays</title>
+  <script>
+  var array = [1, 2, 3];
+  var big_array = [1, 2, 3, 4, 5, 6];
+
+  function lastInArray(array) {
+    return array[array.length - 1];
+  }
+
+  function rollCall(array) {
+    for (var i = 0; i < array.length; i++) {
+      console.log(array[i]);
+    }
+  }
+
+  function reverse(array) {
+    reversed = [];
+    for (var i = array.length - 1; i >= 0; i--) {
+      reversed.push(array[i]);
+    }
+    return reversed;
+  }
+
+  function firstIn(array, value) {
+    var i;
+    for (i = 0; i < array.length; i += 1) {
+      if (array[i] === value) {
+        return i;
+        break;
+      }
+    }
+    return -1;
+  }
+
+  function stringify(array) {
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+      str += array[i];
+    }
+
+    return str;
+  }
+
+  function push(array, value) {
+    var next = array.length
+    array[next] = value;
+    return array.length;
+  }
+
+  function pop(array) {
+    var last = array[array.length - 1];
+    array.length -= 1;
+    return last;
+  }
+
+  function unshift(array, value) {
+    var last;
+    for (var i = array.length; i > 0; i--) {
+      last = array[i - 1];
+      array[i] = last;
+    }
+    array[0] = value;
+    return array.length;
+  }
+
+  function shift(array) {
+    var first = array[0];
+    for (var i = 0; i < array.length; i++) {
+      next = array[i + 1];
+      array[i] = next;
+    }
+    array.length = array.length - 1;
+    return first;
+  }
+
+  function indexOf(array, value) {
+    return firstIn(array, value);
+  }
+
+  function lastIndexOf(array, value) {
+    var idx;
+    for (i = 0; i < array.length; i += 1) {
+      if (array[i] === value) {
+        idx = i;
+      }
+    }
+    return idx || -1;
+  }
+
+  function slice(array, start, end) {
+    var new_array = [];
+
+    for (start; start < end; start++) {
+      new_array.push(array[start]);
+    }
+    return new_array;
+  }
+
+  function splice(array, start, number) {
+    // on récupère dans un array les valeurs à conserver à la fin (s'il y en a )
+
+    var keep_index = array[start + number - 1] || array.length;
+    var kept_values = [];
+    var destroyed_values = [];
+    for (var i = start; i < keep_index; i++) {
+      destroyed_values.push(array[i]);
+    }
+
+    for (keep_index; keep_index < array.length; keep_index++) {
+      kept_values.push(array[keep_index]);
+    }
+
+    array.length = start;
+    while (kept_values.length > 0) {
+      array.push(shift(kept_values));
+    }
+
+    return destroyed_values;
+  }
+
+  function concat(array_1, array_2) {
+    var newArray = [];
+    for (var i = 0; i < array_1.length; i++) {
+      newArray.push(array_1[i]);
+    }
+    for (var i = 0; i < array_2.length; i++) {
+      newArray.push(array_2[i]);
+    }
+    return newArray;
+  }
+
+  function join(array, separator) {
+    result = '';
+
+    for (var i = 0; i < array.length; i++) {
+      result += String(array[i]);
+      if (i < array.length - 1) {
+        result += separator;
+      }
+    }
+    return result;
+  }
+
+  function arraysEqual(first_arr, second_arr) {
+    if (first_arr.length !== second_arr.length) return false;
+
+    for (var i = 0; i < first_arr.length; i++) {
+      if (first_arr[i] !== second_arr[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function firstElementOf(arr) {
+    return arr[0];
+  }
+
+  function lastElementOf(arr) {
+    return arr[arr.length - 1];
+  }
+
+  function nthElementOf(arr, index) {
+    return arr[index];
+  }
+
+  function firstNOf(arr, count) {
+    var newArray = [];
+
+    for (var i = 0; i < count; i++) {
+      newArray.push(arr[i]);
+    }
+    return newArray;
+  }
+
+  function lastNOf(arr, count) {
+    var slice_length = arr.length - count;
+    if (slice_length < 0) return arr;
+    return arr.slice(arr.length - count);
+  }
+
+  function endsOf(beginningArr, endingArr) {
+    return [firstElementOf(beginningArr), lastElementOf(endingArr)];
+  }
+
+  // console.log(arraysEqual([1], [1])); // true
+  // console.log(arraysEqual([1], [2])); // false
+  // console.log(arraysEqual([1, 2], [1, 2, 3])); // false
+  // console.log(arraysEqual([1, 'hi', true], [1, 'hi', true])); // true
+  // console.log(arraysEqual([1, 'hi', true], [1, 'hi', false])); // false
+  // console.log(arraysEqual([1, 'hi', true], [1, 'hello', true])); // false
+  // console.log(arraysEqual([1, 'hi', true], [2, 'hi', true])); // false
+
+  // Write a function that creates and returns a new array from its array argument.
+  // The new array should contain all values from the argument array whose positions
+  // have an odd index.
+
+  function oddElementsOf(arr) {
+    var newArray = [];
+    var i = 0;
+
+    for (i; i < arr.length; i++) {
+      if (i === 0 || i % 2 === 0) continue;
+      newArray.push(arr[i]);
+    }
+    return newArray;
+  }
+
+  var digits = [4, 8, 15, 16, 23, 42];
+
+  oddElementsOf(digits); // returns [8, 16, 42]
+
+  // Write a function that takes two arrays and returns a new array whose
+  // even positions come from the first array, and whose odd positions 
+  // come from the second array. Assume that both arrays have equal length.
+
+  function combinedArray(even, odd) {
+    var newArray = [];
+    for (var i = 0; i < even.length; i++) {
+      newArray.push(even[i]);
+      newArray.push(odd[i]);
+    }
+    return newArray;
+  }
+
+  var digits = [4, 8, 15, 16, 23, 42];
+  var letters = ['A', 'L', 'V', 'A', 'R', 'H'];
+
+  // Write a function that takes an array argument and returns a new array
+  // that contains all the argument's elements in their original order followed
+  // by all the argument's elements in reverse order.
+
+  function autoReverse(arr) {
+    var newArray = arr;
+
+    for (var i = arr.length - 1; i >= 0; i--) {
+      newArray.push(arr[i]);
+    }
+
+    return newArray;
+  }
+
+  function compareNumbers(a, b) {
+    return b - a;
+  }
+
+  function sortDescending(arr) {
+    new_Array = arr.slice();
+    return new_Array.sort(compareNumbers);
+  }
+
+
+  function sumArray(arr) {
+    return arr.reduce((a, b) => a + b, 0);
+  }
+
+  function matrixSums(arr) {
+    var arrayOfSums = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      var sum = sumArray(arr[i]);
+      arrayOfSums.push(sum);
+    }
+
+    return arrayOfSums;
+  }
+
+  // console.log(matrixSums([[2, 8, 5], [12, 48, 0], [12]]));
+
+  function uniqueElements(arr) {
+    var sorted_arr = arr.slice().sort();
+    var newArray = [];
+
+    newArray.push(sorted_arr[0]);
+    for (var i = 1; i < sorted_arr.length; i++) {
+      current_element = sorted_arr[i];
+      if (lastElementOf(newArray) === current_element) continue;
+      newArray.push(current_element);
+    }
+    return newArray;
+  }
+
+  // console.log(uniqueElements([1, 2, 4, 3, 4, 1, 5, 4]));
+
+  function missing(array) {
+    var missingInArray = [];
+    var tested_number = array[0];
+    var end = lastInArray(array);
+
+    for (tested_number; tested_number <= end; tested_number++) {
+      if (firstIn(array, tested_number) === -1) {
+        missingInArray.push(tested_number);
+      }
+    }
+    return missingInArray;
+  }
+
+  console.log(missing([-3, -2, 1, 5])); // [-1, 0, 2, 3, 4]
+  console.log(missing([1, 2, 3, 4])); // []
+  console.log(missing([1, 5])); // [2, 3, 4]
+  console.log(missing([6])); // []
+  </script>
+</head>
+
+<body>
+  <h1>arrays</h1>
+</body>
+
+</html>

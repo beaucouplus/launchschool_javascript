@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>caesar</title>
+  <script>
+  function findLetter(charList, char, shift) {
+    var ALPHABET_SIZE = 26
+    var position = charList.indexOf(char) + shift;
+    if (position > ALPHABET_SIZE - 1) {
+      position = position - ALPHABET_SIZE;
+    }
+
+    return charList.charAt(position);
+  }
+
+  function encryptChar(char, shift) {
+    var UP_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var DOWN_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase();
+    if (!UP_ALPHA.includes(char) && !DOWN_ALPHA.includes(char)) return char;
+
+    return UP_ALPHA.includes(char) ? findLetter(UP_ALPHA, char, shift) : findLetter(DOWN_ALPHA, char, shift);
+  }
+
+  function caesarEncrypt(string, shift) {
+
+    var encrypted = function(char) {
+      return encryptChar(char, shift);
+    }
+
+    return string.split('').map(encrypted).join('');
+  }
+
+
+  // simple shift
+  console.log(caesarEncrypt('A', 0)); // "A"
+  console.log(caesarEncrypt('A', 3)); // "D"
+  console.log(caesarEncrypt('Z', 25));
+  console.log(caesarEncrypt('B', 25));
+
+  // wrap around
+  console.log(caesarEncrypt('y', 5)); // "d"
+  console.log(caesarEncrypt('a', 47)); // "v"
+
+  // all letters
+  console.log(caesarEncrypt('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 25));
+  // "ZABCDEFGHIJKLMNOPQRSTUVWXY"
+  console.log(caesarEncrypt('The quick brown fox jumps over the lazy dog!', 5));
+  // "Ymj vznhp gwtbs ktc ozrux tajw ymj qfed itl!"
+
+  // many non-letters
+  console.log(caesarEncrypt('There are, as you can see, many punctuations. Right?; Wrong?', 2));
+  // "Vjgtg ctg, cu aqw ecp ugg, ocpa rwpevwcvkqpu. Tkijv?; Ytqpi?"
+  </script>
+</head>
+
+<body>
+  <h1>caesar</h1>
+</body>
+
+</html>

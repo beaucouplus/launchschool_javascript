@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>exercises</title>
+  <script>
+  function sum(number) {
+    var add = function(accumulator, value) {
+      return accumulator + value
+    }
+
+    var toNum = function(value) {
+      return Number(value);
+    }
+
+    return String(number).split('').map(toNum).reduce(add);
+  }
+
+  // console.log(sum(23)); // 5
+  // console.log(sum(496)); // 19
+  // console.log(sum(123456789)); // 45
+
+  function alphabeticNumberSort(numbers) {
+    var alpha = ['zero', 'one', 'two', 'three', 'four', 'five', 'six',
+      'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen',
+      'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+    ];
+
+    var sortedAlpha = alpha.slice().sort();
+
+    var numberAtIndex = function(item) {
+      return alpha.indexOf(item);
+    }
+
+    return sortedAlpha.map(numberAtIndex);
+  }
+
+  // console.log(alphabeticNumberSort([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]));
+  // [8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7, 17, 6, 16, 10, 13, 3, 12, 2, 0]
+
+
+  function multiplyAllPairs(first, second) {
+    // iterate over each number of the first array
+    // keep the value to mulitply it with every value of the second array
+
+    // sort the resulting array
+
+    var result = [];
+
+    first.forEach(function(num) {
+      second.forEach(function(multiplier) {
+        result.push(multiplier * num);
+      })
+    });
+
+    var asc = function(a, b) {
+      return a - b
+    };
+
+    return result.sort(asc);
+
+  }
+
+  // console.log(multiplyAllPairs([2, 4], [4, 3, 1, 2]));    // [2, 4, 4, 6, 8, 8, 12, 16]
+
+  function sumOfSums(numbers) {
+
+    var result = 0;
+
+    var add = function(accumulator, value) {
+      return accumulator + value;
+    }
+
+    numbers.forEach(function(item, index) {
+      result += numbers.slice(0, index + 1).reduce(add);
+    });
+
+    return result;
+  }
+
+  // console.log(sumOfSums([3, 5, 2])); // (3) + (3 + 5) + (3 + 5 + 2) --> 21
+  // console.log(sumOfSums([1, 5, 7, 3])); // (1) + (1 + 5) + (1 + 5 + 7) + (1 + 5 + 7 + 3) --> 36
+  // console.log(sumOfSums([4])); // 4
+  // console.log(sumOfSums([1, 2, 3, 4, 5])); // 35
+
+  function substringsAtStart(string) {
+    var result = [];
+    var characters = string.split('');
+    var add = function(accumulator, value) {
+      return accumulator + value;
+    }
+
+    characters.forEach(function(item, index) {
+      result.push(characters.slice(0, index + 1).reduce(add));
+    });
+
+    return result;
+  }
+
+  // console.log(substringsAtStart('abc')); // ["a", "ab", "abc"]
+  // console.log(substringsAtStart('a')); // ["a"]
+  // console.log(substringsAtStart('xyzzy')); // ["x", "xy", "xyz", "xyzz", "xyzzy"]
+
+  function substrings(string) {
+    var result = [];
+
+    string.split('').forEach(function(_, index) {
+      var substring = string.slice(index, string.length);
+      var every_substrings_from_index = substringsAtStart(substring);
+      result.push(...every_substrings_from_index);
+    });
+
+    return result;
+  }
+
+  // console.log(substrings('abcde'));
+
+  // returns
+  // [ "a", "ab", "abc", "abcd", "abcde",
+  //   "b", "bc", "bcd", "bcde",
+  //   "c", "cd", "cde",
+  //   "d", "de",
+  //   "e" ]
+
+
+  function palindromes(string) {
+    var substrgs = substrings(string);
+
+    var palindromes = function(substring) {
+      if (substring.length === 1) return false;
+      return substring === substring.split('').reverse().join('');
+    }
+
+    return substrgs.filter(palindromes);
+    // filter array and check if the item is equal to its inverse
+  }
+
+  // console.log(palindromes('abcd')); // []
+  // console.log(palindromes('madam')); // [ "madam", "ada" ]
+
+  // console.log(palindromes('hello-madam-did-madam-goodbye'));
+  // returns
+  // ["ll", "-madam-", "-madam-did-madam-", "madam", "madam-did-madam", "ada",
+  //   "adam-did-mada", "dam-did-mad", "am-did-ma", "m-did-m", "-did-", "did",
+  //   "-madam-", "madam", "ada", "oo"
+  // ]
+
+  // console.log(palindromes('knitting cassettes'));
+  // // returns
+  // ["nittin", "itti", "tt", "ss", "settes", "ette", "tt"]
+
+  function buyFruit(fruits_and_quantities) {
+    var fruitsRepeated = [];
+
+    fruits_and_quantities.forEach(function(couple) {
+      for (var i = 1; i <= couple[1]; i++) {
+        fruitsRepeated.push(couple[0]);
+      }
+    });
+
+    return fruitsRepeated;
+  }
+
+  // console.log(buyFruit([['apple', 3], ['orange', 1], ['banana', 2]]));
+  // returns ["apple", "apple", "apple", "orange", "banana", "banana"]
+
+  var transactions = [{ id: 101, movement: 'in', quantity: 5 },
+    { id: 105, movement: 'in', quantity: 10 },
+    { id: 102, movement: 'out', quantity: 17 },
+    { id: 101, movement: 'in', quantity: 12 },
+    { id: 103, movement: 'out', quantity: 15 },
+    { id: 102, movement: 'out', quantity: 15 },
+    { id: 105, movement: 'in', quantity: 25 },
+    { id: 101, movement: 'out', quantity: 18 },
+    { id: 102, movement: 'in', quantity: 22 },
+    { id: 103, movement: 'out', quantity: 15 },
+  ];
+
+  function transactionsFor(id, transactionArray) {
+    var byId = function(transaction) {
+      return transaction.id === id;
+    }
+
+    return transactionArray.filter(byId);
+  }
+
+  // console.log(transactionsFor(101, transactions));
+  // returns
+  // [{ id: 101, movement: "in", quantity: 5 },
+  //   { id: 101, movement: "in", quantity: 12 },
+  //   { id: 101, movement: "out", quantity: 18 },
+  // ]
+
+  function isItemAvailable(item, transactionArray) {
+    var itemTransactions = transactionsFor(item, transactionArray);
+    var countQuantity = function(currentAmount, trans) {
+      if (trans.movement === 'in') {
+        return currentAmount + trans.quantity;
+      } else {
+        return currentAmount - trans.quantity;
+      }
+    }
+
+    return itemTransactions.reduce(countQuantity, 0) > 0
+  }
+
+  console.log(isItemAvailable(101, transactions)); // false
+  console.log(isItemAvailable(105, transactions)); // true
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

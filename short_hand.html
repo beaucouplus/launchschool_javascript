@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>short hand</title>
+  <script>
+  // Problem Description
+  // You are given a list of numbers in a "short-hand" range where only
+  // the significant part of the next number is written because
+  // we know the numbers are always increasing (
+  // ex. "1, 3, 7, 2, 4, 1" represents [1, 3, 7, 12, 14, 21]).
+  // Some people use different separators for their ranges
+  // (ex. "1-3, 1-2", "1:3, 1:2", "1..3, 1..2" represent the same
+  // numbers [1, 2, 3, 11, 12]).
+  // Range limits are always inclusive.
+
+  // The possible separators are: ["-", ":", ".."]
+
+  function isSequence(item) {
+    return Array.isArray(item);
+  }
+
+  function lastItem(array) {
+    return array[array.length - 1];
+  }
+
+  function increment(range, array) {
+    var valueToIncrement = range[0];
+    var end = range[1];
+
+    if (end < valueToIncrement) {
+      end = firstSuperiorNumber(valueToIncrement, end);
+    }
+
+    while (valueToIncrement <= end) {
+      if (lastItem(array) !== valueToIncrement) {
+        array.push(valueToIncrement);
+      }
+      valueToIncrement += 1;
+    }
+  }
+
+  function digitsNumber(first, second) {
+    if (first < 10 && second < 10) return 1;
+    
+    var numLength = String(second).length;
+    if (String(first).length === numLength) {
+      return numLength - 1;
+    } else {
+      return numLength;
+    }
+  }
+
+
+  function firstSuperiorNumber(base, candidate) {
+    if (!base) return candidate;
+
+    var digits = digitsNumber(base, candidate);
+
+    var difference = base % (10) ** digits;
+    var tenMultiple = base - difference;
+
+    if (difference > candidate) return tenMultiple + 10 ** digits + candidate;
+    return tenMultiple + candidate;
+  }
+
+  function createNumbersList(string) {
+    var numbersList = [];
+
+    var toNum = function(str) {
+      if (str.startsWith('0')) str = '1' + str;
+      return Number(str);
+    }
+
+    var withNumberSequences = function(string) {
+      var notDigit = /\D/g;
+      var digits = /\d+/g;
+      var spaces = /\s+/;
+
+      string = string.replace(spaces, '');
+
+      if (!(notDigit).test(string)) return Number(string);
+      return string.match(digits).map(toNum);
+    }
+
+    var sequencesAndNumbers = string.split(',').map(withNumberSequences);
+
+    sequencesAndNumbers.forEach(function(element) {
+      if (isSequence(element)) {
+        var range
+        var sequence = element;
+        sequence[0] = firstSuperiorNumber(lastItem(numbersList), sequence[0]);
+
+        sequence.forEach(function(_, index) {
+          range = sequence.slice(index, index + 2);
+          increment(range, numbersList);
+        });
+      } else {
+        var superiorNumber = firstSuperiorNumber(lastItem(numbersList), element);
+        numbersList.push(superiorNumber);
+      }
+    });
+
+    return numbersList;
+  }
+
+  console.log(createNumbersList("1, 3, 7, 2, 4, 1")); // 1, 3, 7, 12, 14, 21
+  console.log(createNumbersList("1-3, 1-2")); // 1, 2, 3, 11, 12
+  console.log(createNumbersList("1:5:2")); // 1, 2, 3, 4, 5, 6, ... 12
+  console.log(createNumbersList("104-2")); // 104, 105, ... 112
+  console.log(createNumbersList("104-02")); // 104, 105, ... 202
+  console.log(createNumbersList("545, 64:11")); // 545, 564, 565, .. 611
+  </script>
+</head>
+
+<body>
+  <h1>short hand</h1>
+</body>
+
+</html>

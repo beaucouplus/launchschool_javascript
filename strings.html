@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>strings</title>
+  <script>
+  // Create a variable named firstName and set it equal to your first name.
+  // Set another variable named lastName to your last name.
+  // Join the two together, separated by a space, and store the result in a variable named fullName.
+  // Log the value of fullName.
+
+  var firstName = "Maxime";
+  var lastName = 'Souillat';
+  var fullName = firstName + ' ' + lastName;
+
+  // console.log(fullName);
+  // console.log(firstName.concat(lastName));
+  // console.log(fullName.split(' '));
+
+  // Create a variable named language and set it equal to 'JavaScript'.
+  //  Find the index of the first occurrence of the letter 'S' and save it to a 
+  //  variable named idx variable. Log the value of idx.
+
+  var language = 'JavaScript';
+  var idx = language.indexOf('S');
+  // console.log(idx);
+
+  var charCode = language.charCodeAt(idx);
+  // console.log(charCode);
+
+  // console.log(String.fromCharCode(charCode));
+
+  // console.log(language.lastIndexOf('a'));
+
+  // Create two variables, a = 'a' and b = 'b'. 
+  // Log a "greater than" comparison between the two variables.
+  // Reassign the value 'B' to variable b, then compare the two variables again, and log the comparison value.
+
+  var a = 'a';
+  var b = 'b';
+
+  // console.log(a > b);
+  var b = 'B';
+  // console.log(a > b);
+
+  // Create variables aIndex and vIndex and store the index of the first occurrences
+  // of letters 'a' and 'v' in the language string.
+  // Call the substr method on language with aIndex as the first argument,
+  // and 4 as the second argument, e.g., language.substr(aIndex, 4).
+  // Log the return value. Repeat the operation using vIndex as the first argument.
+
+  var aIndex = language.indexOf('a');
+  var vIndex = language.indexOf('v');
+
+  // console.log(language.substr(aIndex, 4));
+  // console.log(language.substr(vIndex, 4));
+
+  // console.log(language.substring(aIndex, 4));
+  // console.log(language.substring(vIndex, 4));
+
+
+  // Create variables named fact1 and fact2 and set them equal to 'JavaScript is fun'
+  // and 'Kids like it too', respectively.
+  // Combine the values of the two variables with the string ' and '
+  // between them, and store the result in a variable named compoundSentence.
+  // Make sure the first letter of fact2 shows up as lowercase in compoundSentence.
+  // Log the value of compoundSentence.
+
+  var fact1 = 'JavaScript is fun';
+  var fact2 = 'Kids like it too';
+
+  var compoundSentence = fact1 + ' and ' + fact2[0].toLowerCase() + fact2.substring(1);
+  // console.log(compoundSentence);
+
+  // Create a variable named pi and set it to the result of 22 / 7. 
+  // Convert pi to a String using the toString method. 
+  // Search the resulting string for the final occurrence of '14', and log its index position.
+
+  var pi = 22 / 7;
+  var piString = String(pi);
+  // console.log(piString.lastIndexOf('14'));
+
+
+  // Create a variable named boxNumber and set it to the result of 356.toString(), 
+  // and log the result. Before moving on, try to run your program.
+
+  var boxNumber = (356).toString();
+  // console.log(boxNumber);
+
+  // Convert the boxNumber variable back to a number using parseInt. 
+  // To make sure the result is a number, you can log typeof boxNumber 
+  // to verify the type of the result. 
+  // Now convert the number back to a String by using the String()
+  //  function and log the typeof of the result to verify it is now a String.
+
+  boxNumber = parseInt(boxNumber, 10);
+  // console.log(typeof(boxNumber));
+  boxNumber = String(boxNumber);
+  // console.log(typeof(boxNumber));
+
+  // Write a program that asks for a user's name, 
+  // then greets the user with that name. 
+  // If the user appends a ! to his name (e.g., 'Bill!'), 
+  // the computer should "yell" its greeting: that is, 
+  // it should log everything to the console in uppercase. 
+  // You can check whether the name ends with a ! 
+  // using String.prototype.endsWith() (ES6 only). 
+  // You can remove the ! from the user's name with String.prototype.slice().
+
+  function greetUser() {
+    var name = prompt('What is your name plz?');
+
+    var greeting = "Hello "
+
+    if (name.endsWith('!')) {
+      console.log((greeting + name).toUpperCase().slice(0, -1));
+    } else {
+      console.log(greeting + name);
+    }
+  }
+
+  // greetUser();
+
+  function reverse(string) {
+    return string.split('').reverse().join('');
+  }
+
+  // console.log(reverse('hello')); // returns "olleh"
+  // console.log(reverse('The quick brown fox')); // returns "xof nworb kciuq ehT"
+
+  function acronym(string) {
+    // split word by regex (not a word)
+    // take first letter of each word
+    // capitalize it
+    // join
+
+    var words = string.match(/\w+/g);
+
+    var toAcronym = function(word) {
+      return word[0].toUpperCase();
+    }
+
+    return words.map(toAcronym).join('');
+  }
+
+  // console.log(acronym('Portable Network Graphics')); // "PNG"
+  // console.log(acronym('First In, First Out')); // "FIFO"
+  // console.log(acronym('PHP: HyperText Preprocessor')); // "PHP"
+  // console.log(acronym('Complementary metal-oxide semiconductor')); // "CMOS"
+  // console.log(acronym('Hyper-text Markup Language')); // "HTML"
+
+  //   There must be one @ sign.
+  // The local part must contain one or more letters (A-Z, a-z) 
+  // and/or digits (0-9). It may not contain any other characters.
+  // The domain part must contain two or more components with a single dot (.) 
+  // between each component. Each component must contain one or more letters (A-Z, a-z).
+
+  function isValidEmail(email) {
+    var regex = /^[a-zA-Z0-9]+@\w+(\.[a-zA-Z]+)+$/;
+
+    return regex.test(email);
+  }
+
+  // console.log(isValidEmail('Foo@baz.com.ph')); // returns true
+  // console.log(isValidEmail('Foo@mx.baz.com.ph')); // returns true
+  // console.log(isValidEmail('foo@baz.com')); // returns true
+  // console.log(isValidEmail('foo@baz.ph')); // returns true
+  // console.log(isValidEmail('HELLO123@baz')); // returns false
+  // console.log(isValidEmail('foo.bar@baz.to')); // returns false
+  // console.log(isValidEmail('foo@baz.')); // returns false
+  // console.log(isValidEmail('foo_bat@baz')); // returns false
+  // console.log(isValidEmail('foo@bar.a12')); // returns false
+  // console.log(isValidEmail('foo_bar@baz.com')); // returns false
+  // console.log(isValidEmail('foo@bar.....com')); // returns false
+
+
+  // Write a function that takes a string as an argument and returns true if the string
+  //  contains properly balanced parentheses, false otherwise. 
+  //  Parentheses are properly balanced only when '(' and ')' occur 
+  //  in matching pairs, with each pair starting with '('.
+
+
+  function isBalanced(string) {
+    var PAIR = '()';
+    var UNMATCHED = [')(', '((','))'];
+    var insideParentheses = function(str) {
+      return PAIR.includes(str);
+    }
+
+    var parentheses = string.split('').filter(insideParentheses).join('');
+    var remaining = parentheses.replace(PAIR, '');
+
+    while (remaining.length > 0) {
+      remaining = remaining.replace(PAIR, '');
+      if (remaining === remaining.replace(PAIR,'')) break;
+    }
+
+    return remaining.length === 0;
+  }
+
+  // console.log(isBalanced('What (is) this?')); // true
+  // console.log(isBalanced('What is) this?')); // false
+  // console.log(isBalanced('What (is this?')); // false
+  // console.log(isBalanced('((What) (is this))?')); // true
+  // console.log(isBalanced('((What)) (is this))?')); // false
+  // console.log(isBalanced('Hey!')); // true
+  // console.log(isBalanced(')Hey!(')); // false
+  // console.log(isBalanced('What ((is))) up(')); // false
+  
+  </script>
+</head>
+
+<body>
+  <h1>strings</h1>
+</body>
+
+</html>

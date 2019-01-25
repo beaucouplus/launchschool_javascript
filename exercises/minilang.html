@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>minilang</title>
+  <script>
+  // Consider a MULT operation in a stack-and-register language.
+  // It multiplies the stack value with the register value,
+  // removes the value from the stack,
+  // and stores the result back in the register.
+  // For example, if we start with a stack of [3, 6, 4] (where 4 is the topmost item in the stack)
+  // and a register value of 7, the MULT operation transforms the stack to [3, 6] (the 4 is removed),
+  // and the result of the multiplication, 28, is left in the register. If we do another MULT at this point,
+  // the stack is transformed to [3], and the register is left with the value 168.
+
+  // n : Place a value, n, in the register. Do not modify the stack.
+  // PUSH : Push the register value onto the stack. Leave the value in the register.
+  // ADD : Pop a value from the stack and add it to the register value, storing the result in the register.
+  // SUB : Pop a value from the stack and subtract it from the register value, storing the result in the register.
+  // MULT : Pop a value from the stack and multiply it by the register value, storing the result in the register.
+  // DIV : Pop a value from the stack and divide it into the register value, storing the integer result in the register.
+  // MOD : Pop a value from the stack and divide it into the register value, storing the integer remainder of the division in the register.
+  // POP : Remove the topmost item from the stack and place it in the register.
+  // PRINT : Print the register value.
+
+  // create a register, which is a simple variable began at 0
+  // create a stack, which is an array
+
+
+  // split the string by spaces
+
+  function minilang(commands) {
+    var register = 0;
+    var stack = [];
+    var currentOperation;
+
+    var COMMAND_LIST = ['PUSH', 'ADD', 'SUB', 'MULT', 'DIV', 'MOD', 'POP', 'PRINT'];
+
+    function push() {
+      stack.push(register);
+    }
+
+    function add() {
+      register += stack.pop();
+    }
+
+    function sub() {
+      register -= stack.pop();
+    }
+
+    function mult() {
+      register *= stack.pop();
+    }
+
+    function div() {
+      register /= stack.pop();
+      register = Math.round(register);
+    }
+
+    function mod() {
+      register %= stack.pop();
+      register = Math.round(register);
+    }
+
+    function pop() {
+      register = stack.pop();
+    }
+
+    function print() {
+      console.log(register);
+    }
+
+    var operations = commands.split(' ');
+
+    var handleOperations = function(operation) {
+      switch (operation) {
+        case 'PUSH':
+          push();
+          break;
+        case 'ADD':
+          add();
+          break;
+        case 'SUB':
+          sub();
+          break;
+        case 'MULT':
+          mult();
+          break;
+        case 'DIV':
+          div();
+          break;
+        case 'MOD':
+          mod();
+          break;
+        case 'POP':
+          pop();
+          break;
+        case 'PRINT':
+          print();
+          break;
+        default:
+          register = Number(operation);
+      }
+    }
+
+    operations.forEach(handleOperations);
+
+    return register;
+  }
+
+  minilang('PRINT');
+  // 0
+
+  minilang('5 PUSH 3 MULT PRINT');
+  // 15
+
+  minilang('5 PRINT PUSH 3 PRINT ADD PRINT');
+  // 5
+  // 3
+  // 8
+
+  minilang('5 PUSH POP PRINT');
+  // 5
+
+  minilang('3 PUSH 4 PUSH 5 PUSH PRINT ADD PRINT POP PRINT ADD PRINT');
+  // 5
+  // 10
+  // 4
+  // 7
+
+  minilang('3 PUSH PUSH 7 DIV MULT PRINT');
+  // 6
+
+  minilang('4 PUSH PUSH 7 MOD MULT PRINT');
+  // 12
+
+  minilang('-3 PUSH 5 SUB PRINT');
+  // 8
+
+  minilang('6 PUSH');
+  // (nothing is printed because the `program` argument has no `PRINT` commands)
+  </script>
+</head>
+
+<body>
+  <h1>minilang</h1>
+</body>
+
+</html>

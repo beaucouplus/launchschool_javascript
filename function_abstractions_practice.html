@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>functional abstractions exercises</title>
+  <script>
+  var rectangles = [
+    [3, 4],
+    [6, 6],
+    [1, 8],
+    [9, 9],
+    [2, 2]
+  ];
+
+  // take each pair and multiply them then return the result > map
+  // sum those pairs
+
+  function totalArea(array) {
+    sum = 0;
+
+    var add = function(accumulator, value) {
+      return accumulator + value
+    }
+
+    var multiply = function(arr) {
+      return arr[0] * arr[1]
+    }
+
+    return array.map(multiply).reduce(add)
+  }
+
+  console.log(totalArea(rectangles)); // 141
+
+  // Now, write a second Function named totalSquareArea.
+  // This Function should calculate the total area of a set of rectangles,
+  // just like totalArea. However, it should only include squares in its calculations:
+  // it should ignore rectangles that aren't square.
+
+  var rectangles = [
+    [3, 4],
+    [6, 6],
+    [1, 8],
+    [9, 9],
+    [2, 2]
+  ];
+
+  function totalSquareArea(rectangles) {
+
+    var squareOnly = function(rectangle) {
+      return rectangle[0] === rectangle[1];
+    }
+
+    return totalArea(rectangles.filter(squareOnly));
+  }
+
+  console.log(totalSquareArea(rectangles)); // 121
+
+  var newReleases = [{
+      'id': 70111470,
+      'title': 'Die Hard',
+      'boxart': 'http://cdn-0.nflximg.com/images/2891/DieHard.jpg',
+      'uri': 'http://api.netflix.com/catalog/titles/movies/70111470',
+      'rating': [4.0],
+      'bookmark': [],
+    },
+    {
+      'id': 654356453,
+      'boxart': 'http://cdn-0.nflximg.com/images/2891/BadBoys.jpg',
+      'uri': 'http://api.netflix.com/catalog/titles/movies/70111470',
+      'rating': [5.0],
+      'bookmark': [{ id: 432534, time: 65876586 }],
+    },
+    {
+      'title': 'The Chamber',
+      'boxart': 'http://cdn-0.nflximg.com/images/2891/TheChamber.jpg',
+      'uri': 'http://api.netflix.com/catalog/titles/movies/70111470',
+      'rating': [4.0],
+      'bookmark': [],
+    },
+    {
+      'id': 675465,
+      'title': 'Fracture',
+      'boxart': 'http://cdn-0.nflximg.com/images/2891/Fracture.jpg',
+      'uri': 'http://api.netflix.com/catalog/titles/movies/70111470',
+      'rating': [5.0],
+      'bookmark': [{ id: 432534, time: 65876586 }],
+    },
+  ];
+
+  //  Keep only releases that have both id and title data present.
+  // Keep only the id and title data for each release.
+
+  function processReleaseData(data) {
+    // filter array and select only items that have an id and a title
+    // map the result and return only id and title, in a new object
+
+    var haveIdAndTitle = function(object) {
+      return (!!object.id && !!object.title);
+    }
+
+    var onlyIdAndTitle = function(object) {
+      return { id: object.id, title: object.title }
+    }
+
+    return data.filter(haveIdAndTitle).map(onlyIdAndTitle);
+  }
+
+  console.log(processReleaseData(newReleases));
+
+  // should return:
+  // [{ id: 70111470, title: 'Die Hard' }, { id: 675465, title: 'Fracture' }];
+
+  function octalToDecimal(numberString) {
+    // split string
+    // reverse the string number to make it begin at 0
+    // with a variable begun at 0 to muliply it by ten
+    // map it
+    // reduce it
+    var sum = function(accumulator, current_value) {
+      return accumulator + current_value;
+    }
+
+    var toDecimal = function(string, index) {
+      return Number(string) * (8 ** index);
+    }
+
+    return numberString.split('').reverse().map(toDecimal).reduce(sum);
+  }
+
+  console.log(octalToDecimal('1')); // 1
+  console.log(octalToDecimal('10')); // 8
+  console.log(octalToDecimal('130')); // 88
+  console.log(octalToDecimal('17')); // 15
+  console.log(octalToDecimal('2047')); // 1063
+  console.log(octalToDecimal('011')); // 9
+
+  function anagram(word, list) {
+    // map the list to sort every word
+    // select the results again the word sorted too
+
+    var orderWordLetters = function(word) {
+      return word.split('').sort().join('');
+    }
+
+    var isAnagram = function(candidate) {
+      return orderWordLetters(candidate) === orderWordLetters(word);
+    }
+
+    return list.filter(isAnagram);
+  }
+
+  console.log(anagram('listen', ['enlists', 'google', 'inlets', 'banana'])); // [ "inlets" ]
+  console.log(anagram('listen', ['enlist', 'google', 'inlets', 'banana'])); // [ "enlist", "inlets" ]
+
+  var bands = [
+    { name: 'sunset rubdown', country: 'UK', active: false },
+    { name: 'women', country: 'Germany', active: false },
+    { name: 'a silver mt. zion', country: 'Spain', active: true },
+  ];
+
+
+  // The band countries are wrong: all the bands should have 'Canada'
+  // as the country.
+  // The band name should have all words capitalized.
+  // Remove all dots from the band names.
+
+  function processBands(data) {
+
+    var newData = data.slice();
+    // map objects
+    // change country to canada
+    // capitalize and remove dots from band names
+
+    var capitalized = function(string) {
+      return string[0].toUpperCase() + string.slice(1, string.length);
+    }
+
+    function formatName(bandName) {
+      return bandName.replace('.', '').split(' ').map(capitalized).join(' ');
+    }
+
+    var formatted = function(band) {
+      return {
+        name: formatName(band.name),
+        country: 'Canada',
+        active: band.active,
+      }
+    }
+
+    return newData.map(formatted);
+  }
+
+  console.log(processBands(bands));
+
+  // should return:
+  // [
+  //   { name: 'Sunset Rubdown', country: 'Canada', active: false },
+  //   { name: 'Women', country: 'Canada', active: false },
+  //   { name: 'A Silver Mt Zion', country: 'Canada', active: true },
+  // ]
+    
+  function isAllUnique(string) {
+  // ...
+  // iterate over letters
+  // create an empty object letters and add a new letter each time it is created
+  // check if object contains letter
+  // if true, return false, if false, create
+  // then return true if the iteration finishes
+  
+
+  var letterCount = {};
+  var letters = string.split('');
+
+  for (var i = 0; i < letters.length; i++) {
+    var letter = letters[i];
+
+    if (letterCount[letter]) return false;
+    letterCount[letter] = 1;
+  }
+
+  return true;
+}
+
+console.log(isAllUnique('The quick brown fox jumped over a lazy dog'));  // false
+console.log(isAllUnique('123,456,789'));                                 // false
+console.log(isAllUnique('The big apple'));                               // false
+console.log(isAllUnique('The big apPlE'));                               // false
+console.log(isAllUnique('!@#$%^&*()'));                                  // true
+console.log(isAllUnique('abcdefghijklmnopqrstuvwxyz'));                  // true
+
+
+
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>

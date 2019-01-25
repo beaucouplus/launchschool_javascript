@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>diamonds</title>
+  <script>
+  // def diamond(size)
+  //   middle = size / 2
+  //   result = []
+  //   (1..size).step(2) { |x| result << "#{'*' * x}".center(size) }
+  //   result = result + result[0, middle].reverse
+  //   puts result
+  // end
+  
+  function diamond(size) {
+    var middle = Math.floor(size / 2);
+    var lines = [];
+    var stars = '';
+    var STAR = '*';
+    var SPACE = ' ';
+
+    for(var i = 1; i <= size; i+= 2) {
+      var leftSpaces = SPACE.repeat((size - i) / 2);
+      stars = STAR.repeat(i); 
+      lines.push(leftSpaces + stars);
+    }
+    var otherHalf = lines.slice(0,middle).reverse();
+    lines.push(...otherHalf);
+
+    lines.forEach(function(line) {
+      console.log(line);
+    });
+    return '';
+  } 
+
+  console.log(diamond(1));
+  console.log(diamond(3));
+  console.log(diamond(9));
+
+  </script>
+</head>
+
+<body>
+  <h1>diamonds</h1>
+</body>
+
+</html>

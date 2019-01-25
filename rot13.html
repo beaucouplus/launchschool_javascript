@@ -1,37 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Rot 13</title>
   <script>
+  
+  const A = 'A'.charCodeAt();
+  const Z = 'Z'.charCodeAt();
+  const TIPPING_POINT = 'M';
+  const ROT13_SIZE = 13;
 
-  function CypherFromAscii(ascii_num) {
-    ascii_num += 13;
-    if ((ascii_num > 91 && ascii_num < 104) || ascii_num > 122) {
-      ascii_num -= 26
+
+  function isALetter(letter) {
+    letter = letter.toUpperCase();
+    var ascii_position = letter.charCodeAt();
+
+    return ascii_position >= A && ascii_position <= Z
+  }
+
+  function cypher(character) {
+    var ascii_position = character.charCodeAt()
+
+    if (character.toUpperCase() > TIPPING_POINT) {
+      ascii_position -= ROT13_SIZE;
+    } else { 
+      ascii_position += ROT13_SIZE;
     }
-    return String.fromCharCode(ascii_num);
+    return String.fromCharCode(ascii_position);
   }
 
   function rot13(string) {
     var cyphered_string = '';
     var ascii_num;
+    var character;
 
     for (var i = 0; i < string.length; i++) {
-      ascii_num = string.charCodeAt(i);
-      if (ascii_num < 65 || ascii_num > 122) {
-        cyphered_string += string[i];
+      character = string[i];
+      if (isALetter(character)) {
+        cyphered_string += cypher(character);
       } else {
-        cyphered_string += CypherFromAscii(ascii_num);
+        cyphered_string += character;
       }
     }
 
     return cyphered_string;
   }
 
-  console.log(rot13('Teachers open the door, but you must enter by yourself.'));
-  console.log(rot13(rot13('Teachers open the door, but you must enter by yourself.')));
+  // console.log(rot13('Teachers open the door, but you must enter by yourself.'));
+  // console.log(rot13(rot13('Teachers open the door, but you must enter by yourself.')));
+  console.log('Kikou_les[\\]^_`amis//');
+  console.log('');
+  console.log(rot13('Kikou_les[\\]^_`amis//'));
+  console.log('');
+  console.log(rot13(rot13('Kikou_les[\\]^_`amis//')));
+
+  console.log('vive la vie');
+  console.log(rot13('vive la vie'));
+  console.log(rot13(rot13('vive la vie')));
+
+  console.log(rot13('abc def ghi klm nop qrs tuv xyz'));
+  console.log(rot13(rot13('abc def ghi klm nop qrs tuv xyz')));
+
   </script>
 </head>
 

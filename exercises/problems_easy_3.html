@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>medium 1</title>
+  <script>
+  // Teddy is 69 years old!
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+
+  function randomTeddy() {
+    var age = getRandomInt(20, 200);
+
+    console.log('Teddy is ' + age + ' years old!')
+  }
+
+  function checkIfInRange() {
+    var numbers = [];
+    var current_num = 0;
+    var tested_num;
+    var inRange = false;
+    for (var i = 1; i <= 5; i++) {
+      current_num = Number(prompt('Enter the ' + i + ' number:'));
+      numbers.push(current_num);
+    }
+    tested_num = Number(prompt('Enter the 6th number:'));
+
+    numbers.forEach(function(item) {
+      if (item === tested_num) {
+        inRange = true;
+      }
+    });
+
+    if (inRange) {
+      console.log('the number ' + tested_num + ' appears in ' + numbers);
+    } else {
+      console.log('the number ' + tested_num + ' does not appear in ' + numbers);
+    }
+  }
+
+  // What is your age? 30
+  // At what age would you like to retire? 70
+  // It's 2017. You will retire in 2057.
+  // You have only 40 years of work to go!
+
+
+  function whenWillIRetire() {
+    var current_age = Number(prompt('What is your age?'));
+    var retirement_age = Number(prompt('At what age would you like to retire?'));
+    var current_year = new Date().getFullYear();
+
+    var years_to_go = retirement_age - current_age;
+    var retirement_year = current_year + years_to_go;
+
+    console.log('It\'s ' + current_year + '.', 'You will retire in', retirement_year);
+    console.log('You have only', years_to_go, 'years of work to go!');
+  }
+
+
+  function isPalindrome(string) {
+    var reverse = '';
+    for (i = string.length - 1; i >= 0; i--) {
+      reverse += string[i];
+    }
+    return string === reverse;
+  }
+
+  // console.log(isPalindrome('madam')); // true
+  // console.log(isPalindrome('Madam')); // false (case matters)
+  // console.log(isPalindrome("madam i'm adam")); // false (all characters matter)
+  // console.log(isPalindrome('356653')); // true
+
+  function isRealPalindrome(string) {
+    var alphanumerics = /\w+/g;
+    var strings = string.match(alphanumerics);
+    var cleanedString = strings.join('').toLowerCase();
+    return isPalindrome(cleanedString);
+  }
+
+  // console.log(isRealPalindrome('madam')); // true
+  // console.log(isRealPalindrome('Madam')); // true (case does not matter)
+  // console.log(isRealPalindrome("Madam, I'm Adam")); // true (only alphanumerics matter)
+  // console.log(isRealPalindrome('356653')); // true
+  // console.log(isRealPalindrome('356a653')); // true
+  // console.log(isRealPalindrome('123ab321')); // false
+
+  function isPalindromicNumber(number) {
+    number = Number(number);
+
+    stringNumber = String(number);
+    return isPalindrome(stringNumber);
+  }
+
+  // console.log(isPalindromicNumber(34543)); // true
+  // console.log(isPalindromicNumber(123210)); // false
+  // console.log(isPalindromicNumber(22)); // true
+  // console.log(isPalindromicNumber(5)); // true
+  // console.log(isPalindromicNumber(0000123210)); // true
+
+  function runningTotal(array) {
+    var totalArray = [];
+    var currentTotal;
+
+    array.forEach(function(item) {
+      var lastItem = totalArray[totalArray.length - 1] || 0;
+      currentTotal = lastItem + item;
+      totalArray.push(currentTotal);
+    });
+
+    return totalArray;
+  }
+
+  // [2,7]
+
+  // console.log(runningTotal([2, 5, 13])); // [2, 7, 20] 
+  // console.log(runningTotal([14, 11, 7, 15, 20])); // [14, 25, 32, 47, 67]
+  // console.log(runningTotal([3])); // [3]
+  // console.log(runningTotal([])); // []
+
+
+  function swapLetters(string) {
+    if (string.length < 2) return string;
+
+    var first = string[0];
+    var last_index = string.length - 1;
+    var last = string[last_index];
+    var between = string.slice(1, last_index);
+
+    return last + between + first;
+  }
+
+  // on splitte en mots
+  // pour chaque mot, on intervertit la première et la dernière lettre
+  // >>>>> ça mérite une fonction
+  // on map 
+
+  function swap(string) {
+    var words = string.split(' ');
+
+    return words.map(item => swapLetters(item)).join(' ');
+  }
+
+  // console.log(swap('Oh what a wonderful day it is')); // "hO thaw a londerfuw yad ti si"
+  // console.log(swap('Abcde')); // "ebcdA"
+  // console.log(swap('a')); // "a"
+
+
+  function wordSizes(string) {
+    if (string.length === 0) return {};
+
+    var alphanumerics = /\w+/g;
+    var words = string.split(' ');
+    var sizes = {};
+
+    words.forEach(function(item) {
+      item = item.match(alphanumerics).join('');
+      var size = item.length;
+      
+      if (!sizes[size]) {
+        sizes[size] = 0;
+      }
+      sizes[size]++;
+    });
+
+    return sizes;
+  }
+
+  console.log(wordSizes('Four score and seven.')); // { "3": 1, "4": 1, "5": 1, "6": 1 }
+  console.log(wordSizes('Hey diddle diddle, the cat and the fiddle!')); // { "3": 5, "6": 1, "7": 2 }
+  console.log(wordSizes("What's up doc?")); // { "2": 1, "4": 1, "6": 1 }
+  console.log(wordSizes('')); // {}
+  </script>
+</head>
+
+<body>
+  <h1>medium 1</h1>
+</body>
+
+</html>

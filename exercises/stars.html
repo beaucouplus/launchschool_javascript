@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>stars</title>
+  <script>
+  function star(size) {
+
+    var middle = Math.floor(size / 2)
+    var STAR = '*';
+    var SPACE = ' ';
+    var firstStarPos = 0;
+    var lastStarPos = size - 1;
+
+    var topLines = [];
+
+
+    var starsOnly = STAR.repeat(size);
+    var spacesOnly = SPACE.repeat(size);
+
+    function createDefaultLine() {
+      var line = spacesOnly.split('');
+      line[middle] = STAR;
+      return line;
+    }
+
+    var defaultLine = createDefaultLine();
+
+    for (var firstStarPos; firstStarPos < middle; firstStarPos++) {
+      var currentLine = defaultLine.slice(0);
+
+      currentLine[firstStarPos] = STAR;
+      currentLine[lastStarPos] = STAR;
+
+      lastStarPos -= 1;
+      topLines.push(currentLine.join(''));
+    }
+
+    var CompleteStarLines = topLines.concat(starsOnly, topLines.slice(0).reverse());
+
+    CompleteStarLines.forEach(function(line) {
+      console.log(line);
+    });
+    console.log('');
+
+  }
+
+  star(7);
+  // logs
+  // *  *  *
+  //  * * *
+  //   ***
+  // *******
+  //   ***
+  //  * * *
+  // *  *  *
+  star(9);
+  star(11);
+  star(13);
+
+  star(33);
+  // logs
+  // *   *   *
+  //  *  *  *
+  //   * * *
+  //    ***
+  // *********
+  //    ***
+  //   * * *
+  //  *  *  *
+  // *   *   *
+  </script>
+</head>
+
+<body>
+  <h1>stars</h1>
+</body>
+
+</html>

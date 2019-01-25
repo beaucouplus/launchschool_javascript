@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>easy 5</title>
+  <script>
+  function repeater(string) {
+    var doubles = '';
+
+    string.split('').forEach(function(letter) {
+      var doubled_letter = letter + letter;
+      doubles += doubled_letter;
+    })
+
+    return doubles;
+  }
+
+  // console.log(repeater('Hello')); // "HHeelllloo"
+  // console.log(repeater('Good job!')); // "GGoooodd  jjoobb!!"
+  // console.log(repeater('')); // ""
+
+  function doubleConsonants(string) {
+    var consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"];
+    var result = '';
+    // checker string lettre par lettre (on splitte)
+    // on vérifie si la lettre en minuscule est *inclue* dans l'array
+    // si oui, on double, si non, on double pas.
+
+    for (var i = 0; i < string.length; i++) {
+      var letter = string[i];
+      if (consonants.includes(letter.toLowerCase())) {
+        result += letter;
+      }
+      result += letter;
+    }
+    return result;
+  }
+
+  // console.log(doubleConsonants('String')); // "SSttrrinngg"
+  // console.log(doubleConsonants('Hello-World!')); // "HHellllo-WWorrlldd!"
+  // console.log(doubleConsonants('July 4th')); // "JJullyy 4tthh"
+  // console.log(doubleConsonants('')); // ""
+
+  function reverseNumber(number) {
+    var stringNumber = String(number);
+    var reversedStringNumber = '';
+
+    for (var i = stringNumber.length - 1; i >= 0; i--) {
+      reversedStringNumber += stringNumber[i];
+    }
+
+    return Number(reversedStringNumber);
+  }
+
+  // console.log(reverseNumber(12345)); // 54321
+  // console.log(reverseNumber(12213)); // 31221
+  // console.log(reverseNumber(456)); // 654
+  // console.log(reverseNumber(12000)); // 21 -- Note that zeros get dropped!
+  // console.log(reverseNumber(1)); // 1
+
+  function centerOf(string) {
+    if (string.length === 1) return string;
+    //  on chope le milieu avec math.ceil de la moitié de la string length,
+    //  si le string est impair on récupère juste l'item à la moitié
+    //  si c'est pair on récupère aussi celui d'avant
+    var length = string.length
+    var middle = Math.ceil(length / 2 - 1);
+
+    if (length % 2 === 0) return string[middle] + string[middle + 1];
+    return string[middle];
+  }
+  // console.log(centerOf('I Love Ruby')); // "e"
+  // console.log(centerOf('Launch School')); // " "
+  // console.log(centerOf('Launch')); // "un"
+  // console.log(centerOf('Launchschool')); // "hs"
+  // console.log(centerOf('x')); // "x"
+
+  function negative(number) {
+    return -Math.abs(number);
+  }
+
+  // console.log(typeof(negative(5))); // -5
+  // console.log(negative(-3)); // -3
+  // console.log(negative(0)); // -0
+
+  function sequence(items_number) {
+    var result = [];
+
+    for (var i = 1; i <= items_number; i++) {
+      result.push(i);
+    }
+    return result;
+  }
+
+  // console.log(sequence(5)); // [1, 2, 3, 4, 5]
+  // console.log(sequence(3)); // [1, 2, 3]
+  // console.log(sequence(1)); // [1]
+
+
+  function swapName(string) {
+    // split string
+    // reverse puis join avec ","
+    return string.split(' ').reverse().join(", ")
+  }
+
+  // console.log(swapName('Joe Roberts'));    // "Roberts, Joe"
+
+  function sequenceFrom(items_number, start) {
+    var result = [];
+
+    for (var i = start; result.length < items_number; i += start) {
+      result.push(i);
+    }
+    return result;
+  }
+
+  // console.log(sequenceFrom(5, 1)); // [1, 2, 3, 4, 5]
+  // console.log(sequenceFrom(4, -7)); // [-7, -14, -21, -28]
+  // console.log(sequenceFrom(3, 0)); // [0, 0, 0]
+  // console.log(sequenceFrom(0, 1000000)); // []
+
+  function reverseSentence(string) {
+    // on splitte, on reverse, on join avec un espace
+    return string.split(' ').reverse().join(' ');
+  }
+
+  // console.log(reverseSentence('')); // ""
+  // console.log(reverseSentence('Hello World')); // "World Hello"
+  // console.log(reverseSentence('Reverse these words')); // "words these Reverse"
+
+  function reverseWords(string) {
+    var words = string.split(' ');
+    var reversedWords = words.map(function(item) {
+      if (item.length < 4) return item;
+      return item.split('').reverse().join('')
+    });
+    return reversedWords.join(' ');
+  }
+
+
+
+  console.log(reverseWords('Professional')); // "lanoisseforP"
+  console.log(reverseWords('Walk around the block')); // "Walk dnuora the kcolb"
+  console.log(reverseWords('Launch School')); // "hcnuaL loohcS"
+  </script>
+</head>
+
+<body>
+  <h1>easy 5</h1>
+</body>
+
+</html>

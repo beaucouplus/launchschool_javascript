@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>objects</title>
+  <script>
+  var pets = {
+    cat: 'Simon',
+    dog: 'Dwarf',
+    mice: null,
+  };
+
+  function objectHasProperty(object, property) {
+    var item;
+
+    for (item in object) {
+      if (item === property) return true;
+    }
+    return false;
+  }
+
+  // console.log(objectHasProperty(pets, 'dog')); // true
+  // console.log(objectHasProperty(pets, 'lizard')); // false
+  // console.log(objectHasProperty(pets, 'mice')); // true
+
+  var wins = {
+    steve: 3,
+    susie: 4,
+  };
+
+  function incrementProperty(object, property) {
+    if (objectHasProperty(object, property)) {
+      object[property]++;
+    } else {
+      object[property] = 0;
+      object[property]++;
+    }
+  }
+
+  incrementProperty(wins, 'susie'); // 5
+  wins; // { steve: 3, susie: 5 }
+  incrementProperty(wins, 'lucy'); // 1
+  wins; // { steve: 3, susie: 5, lucy: 1 }
+
+  var hal = {
+    model: 9000,
+    enabled: true,
+  };
+
+  var sal = {};
+
+  function copyProperties(first, second) {
+    var property;
+    var length = 0;
+    for (property in first) {
+      second[property] = first[property];
+      length++;
+    }
+    return length;
+  }
+
+  copyProperties(hal, sal); // 2
+  sal; // { model: 9000, enabled: true }
+
+
+  function wordCount(string) {
+    var words = string.split(' ');
+    var object = {};
+    var property;
+
+    for (var i = 0; i < words.length; i++) {
+      property = words[i];
+
+      if (!object[property]) {
+        object[property] = 0;
+      }
+      object[property]++;
+    }
+    return object;
+  }
+
+  wordCount('box car cat bag box'); // { box: 2, car: 1, cat: 1, bag: 1 }
+
+  function greetings(array, object) {
+    var name = array.join(' ');
+    var work = Object.values(object).join(' ');
+
+    var sentence = 'Hello, ' + name + '! Nice to have a ' + work + ' around.'
+    console.log(sentence);
+  }
+
+  // greetings(['John', 'Q', 'Doe'], { title: 'Master', occupation: 'Plumber' });
+
+
+  // Note that repeatedCharacters does a bit more than simply count the frequency of each character: 
+  // it determines the counts, but only returns counts for characters that have a count of 2 or more. 
+  // It also ignores the case.
+
+  // 2 or more chars
+  // no case 
+
+  function repeatedCharacters(string) {
+    // transform to minus
+    // create empty object
+    // create temporary array ?
+    var sorted_chars = string.toLowerCase().split('').sort();
+    var repeatedChars = {}
+
+    for (var i = 0; i < sorted_chars.length; i++) {
+      if (sorted_chars[i] === sorted_chars[i - 1]) {
+        var letter = sorted_chars[i];
+        if (!repeatedChars[letter]) {
+          repeatedChars[letter] = 1;
+        }
+        repeatedChars[letter]++;
+      }
+    }
+    return repeatedChars;
+
+  }
+
+  repeatedCharacters('Programming'); // { r: 2, g: 2, m: 2 }
+  repeatedCharacters('Combination'); // { o: 2, i: 2, n: 2 }
+  repeatedCharacters('Pet'); // {}
+  repeatedCharacters('Paper'); // { p: 2 }
+  repeatedCharacters('Baseless'); // { s: 3, e: 2 }
+  </script>
+</head>
+
+<body>
+  <h1>objects</h1>
+</body>
+
+</html>

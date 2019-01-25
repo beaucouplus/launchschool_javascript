@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>objects exos</title>
+  <script>
+  function penultimate(string) {
+    var arr = string.split(' ');
+    return arr[arr.length - 2];
+  }
+
+
+  function addZeroIfNeeded(time) {
+    time = String(time);
+    return time.length < 2 ? '0' + time : time;
+  }
+
+  function timeOfDay(digits) {
+    var time = new Date(2013, 2, 1, 0, digits);
+    var hours = addZeroIfNeeded(time.getHours());
+    var minutes = addZeroIfNeeded(time.getMinutes());
+    return hours + ':' + minutes;
+  }
+
+  timeOfDay(0); // "00:00"
+  timeOfDay(-3); // "23:57"
+  timeOfDay(35); // "00:35"
+  timeOfDay(-1437); // "00:03"
+  timeOfDay(3000); // "02:00"
+  timeOfDay(800); // "13:20"
+  timeOfDay(-4231); // "01:29"
+
+
+
+
+  function afterMidnight(string) {
+    var midnight = new Date('December 17, 1995 00:00').getTime();
+    var date_string = 'December 17, 1995 ' + string;
+    var date_in_milliseconds = new Date(date_string).getTime();
+
+    var minutesAfterMidnight = (date_in_milliseconds - midnight) / 1000 / 60;
+    return minutesAfterMidnight;
+
+  }
+
+  function beforeMidnight(string) {
+    var midnight = new Date('December 18, 1995 00:00').getTime();
+    var date_string = 'December 17, 1995 ' + string;
+    var date_in_milliseconds = new Date(date_string).getTime();
+
+    var minutesAfterMidnight = (midnight - date_in_milliseconds) / 1000 / 60;
+    return minutesAfterMidnight;
+  }
+
+  afterMidnight('00:00'); // 0
+  beforeMidnight('00:00'); // 0
+  afterMidnight('12:34'); // 754
+  beforeMidnight('12:34'); // 686
+  </script>
+</head>
+
+<body>
+  <h1>objects exos</h1>
+</body>
+
+</html>

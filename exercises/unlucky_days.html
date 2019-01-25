@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>exercises</title>
+  <script>
+
+  function fridayThe13ths(year) {
+    var dates = [];
+    var current13th;
+    var fridays;
+
+    for (var month = 0; month < 12; month++) {
+      current13th = new Date(year, month, 13)
+      dates.push(current13th); 
+    }
+
+    fridays = dates.filter(x => x.getDay() === 5);
+
+    return fridays.length
+  }
+
+
+  console.log(fridayThe13ths(1986), 1); // 1
+  console.log(fridayThe13ths(2015), 3); // 3
+  console.log(fridayThe13ths(2017), 2); // 2
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

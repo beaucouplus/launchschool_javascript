@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>math</title>
+  <script>
+  function toDegrees(radians) {
+    return radians * 180 / Math.PI;
+  }
+
+  // Create a function that takes two arguments, a minimum and a maximum value, 
+  // and returns a random integer between those numbers (including both of the numbers).
+  // Your solution should handle the scenario that the user inadvertently swaps the positions
+  // of the min and max values or the scenario that the min and max values are equal.
+  // You may assume that the user always provides the min and max values.
+
+  function randomize(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+
+    if (min > max) {
+      old_min = min;
+      min = max;
+      max = old_min;
+    }
+
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+  }
+
+  // Log a string, "Today's day is 5", that tells the current day of the week as a number
+  // between 0 and 6 (Sunday is 0, Saturday is 6).
+  // Use the getDay method to obtain the number of the day of week.
+  // 
+
+
+  function dateSuffix(day) {
+    if (day === 11 || day === 12 || day === 13) return 'th';
+
+    switch (day) {
+      case 1:
+        return 'st';
+        break;
+      case 2:
+        return 'nd';
+        break;
+      case 3:
+        return 'rd';
+        break;
+      default:
+        return 'th';
+    }
+  }
+
+
+  function formattedMonth(date) {
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months[date.getMonth()];
+  }
+
+  function formattedDay(date) {
+    var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var wday = date.getDay();
+    return daysOfWeek[wday];
+  }
+
+  function formattedMonthDay(date) {
+    var wday = date.getDate();
+    var suffix = dateSuffix(wday);
+    return wday + suffix;
+  }
+
+
+  function formattedDate(date) {
+    var currentMonthDay = formattedMonthDay(date);
+    var currentWday = formattedDay(date);
+    var currentMonth = formattedMonth(date);
+
+    return "Today's date is " + currentWday + ', ' + currentMonth + ' ' + currentMonthDay;
+  }
+
+
+
+  var today = new Date();
+  var tomorrow = new Date();
+
+  function formatTime(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+
+    return hours + ':' + minutes
+  }
+
+
+  </script>
+</head>
+
+<body>
+  <h1>math</h1>
+</body>
+
+</html>

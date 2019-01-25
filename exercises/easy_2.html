@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>exercises</title>
+  <script>
+  function crunch(string) {
+    var result = ''
+    var character;
+    for (var i = 0; i < string.length; i++) {
+      character = string[i];
+      if (result.endsWith(character)) continue;
+      result += character;
+    }
+    return result;
+  }
+
+  // console.log(crunch('ddaaiillyy ddoouubbllee')); // "daily double"
+  // console.log(crunch('4444abcabccba')); // "4abcabcba"
+  // console.log(crunch('ggggggggggggggg')); // "g"
+  // console.log(crunch('a')); // "a"
+  // console.log(crunch('')); // ""
+
+
+  function logInBox(string) {
+    var result = [];
+    var SPACE = ' ';
+    var HYPHEN = '-';
+    var CORNER_LEFT = '+-';
+    var CORNER_RIGHT = '-+';
+    var LEFT = '| ';
+    var RIGHT = ' |';
+    var HORIZONTAL = '_';
+    var hyphenLine = '';
+    var emptyLine = '';
+
+    for (var i = 0; i < string.length; i++) {
+      hyphenLine += HYPHEN;
+      emptyLine += SPACE;
+    }
+
+    var border = CORNER_LEFT + hyphenLine + CORNER_RIGHT;
+    var spacer = LEFT + emptyLine + RIGHT;
+    var text = LEFT + string + RIGHT;
+
+    result = [border, spacer, text, spacer, border];
+    result.forEach(function(element) {
+      console.log(element);
+    });
+  }
+
+  // logInBox('To boldly go where no one has gone before.');
+  // logInBox('');
+  // 
+  // 
+  // 
+
+  // Write a function that takes one argument, a positive integer, and returns a
+  // string of alternating '1's and '0's, always starting with a '1'. The length
+  // of the string should match the given integer.
+
+  function stringy(max) {
+    var result = ''
+    for (var i = 1; i <= max; i++) {
+      if (i % 2 === 0) {
+        result += '0'
+      } else {
+        result += '1';
+      }
+    }
+    return result;
+  }
+
+  // console.log(stringy(6)); // "101010"
+  // console.log(stringy(9)); // "101010101"
+  // console.log(stringy(4)); // "1010"
+  // console.log(stringy(7)); // "1010101"
+  // 
+  // Write a function that calculates and returns the index of the first Fibonacci
+  // number that has the number of digits specified by the argument.
+  // (The first Fibonacci number has an index of 1.)
+  // 
+  function findFibonacciIndexByLength(digits) {
+    var limit = 1 * 10 ** (digits - 1);
+    var last_fib = 1;
+    var fibos = [1, 1];
+    var current_fibs;
+
+    while (limit > last_fib) {
+      current_fibs = fibos.slice(-2);
+      last_fib = current_fibs.reduce((a, b) => a + b, 0);
+      fibos.push(last_fib);
+    }
+    return fibos.length;
+  }
+
+  // console.log(findFibonacciIndexByLength(2)); // 7
+  // console.log(findFibonacciIndexByLength(10)); // 45
+  // console.log(findFibonacciIndexByLength(16)); // 74
+
+  function triangle(width) {
+    var STAR = '*';
+    var SPACE = ' ';
+    var spaces;
+    var stars;
+    for (var i = 1; i <= width; i++) {
+      spaces = SPACE.repeat(width - i);
+      stars = STAR.repeat(i);
+      console.log(spaces + stars);
+    }
+  }
+
+  // triangle(5);
+  // triangle(9);
+
+  function madlib() {
+    var noun = prompt('Enter a noun');
+    var verb = prompt('Enter a verb');
+    var adverb = prompt('Enter an adverb');
+    var adjective = prompt('Enter an adjective');
+
+    msg = 'Do you ' + verb + ' your ' + adjective + ' ' + noun + ' ' + adverb + '? That\'s hilarious';
+    console.log(msg);
+  }
+  // madlib();
+
+
+  function twice(number) {
+    var string_number = number.toFixed();
+    var half = string_number.length / 2;
+
+    if (string_number.slice(0, half) === string_number.slice(half)) {
+      return number;
+    } else {
+      return number * 2;
+    }
+  }
+
+  // console.log(twice(37)); // 74
+  // console.log(twice(44)); // 44
+  // console.log(twice(334433)); // 668866
+  // console.log(twice(444)); // 888
+  // console.log(twice(107)); // 214
+  // console.log(twice(103103)); // 103103
+  // console.log(twice(3333)); // 3333
+  // console.log(twice(7676)); // 7676
+  // 
+  // 
+
+  function getGrade(first, second, third) {
+    var average = (first + second + third) / 3;
+
+    if (average >= 90) {
+      return 'A';
+    } else if (average >= 80) {
+      return 'B';
+    } else if (average >= 70) {
+      return 'C';
+    } else if (average >= 60) {
+      return 'D';
+    } else {
+      return 'F';
+    }
+
+  }
+
+  // console.log(getGrade(95, 90, 93)); // "A"
+  // console.log(getGrade(50, 50, 95)); // "D"
+
+  function cleanUp(string) {
+    var character;
+    var result = '';
+    var SPACE = ' ';
+    for (var i = 0; i < string.length; i++) {
+      character = string[i];
+      if (isALetter(character)) {
+        result += character;
+      } else {
+        if (result.endsWith(SPACE)) continue;
+        result += SPACE;
+      }
+    }
+    return result;
+  }
+
+  function isALetter(letter) {
+    const A = 'A'.charCodeAt();
+    const Z = 'Z'.charCodeAt();
+
+    letter = letter.toUpperCase();
+    var ascii_position = letter.charCodeAt();
+
+    return ascii_position >= A && ascii_position <= Z
+  }
+
+
+  // console.log(cleanUp("---what's my +*& line?"));    // " what s my line "
+
+  function endOfCentury(year) {
+    return year % 100 === 0
+  }
+
+  function getCentury(year) {
+    var century = year - (year % 100);
+
+    if (endOfCentury(year)) {
+      return century / 100;
+    } else {
+      return century / 100 + 1;
+    }
+  }
+
+  function getSuffix(century) {
+    var dozen = century % 100;
+    if (dozen === 11 || dozen === 12 || dozen === 13) return 'th';
+
+    var units = century % 10;
+    switch (units) {
+      case 1: 
+        return 'st';
+        break;
+      case 2:
+        return 'nd';
+        break;
+      case 3:
+        return 'rd';
+        break;
+      default:
+        return 'th';
+    }
+  }
+
+  function century(year) {
+    var century = getCentury(year);
+    var suffix = getSuffix(century);
+
+    return century.toFixed() + suffix; 
+  }
+
+  console.log(century(2000)); // "20th"
+  console.log(century(2001)); // "21st"
+  console.log(century(1965)); // "20th"
+  console.log(century(256)); // "3rd"
+  console.log(century(5)); // "1st"
+  console.log(century(10103)); // "102nd"
+  console.log(century(1052)); // "11th"
+  console.log(century(1127)); // "12th"
+  console.log(century(11201)); // "113th"
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

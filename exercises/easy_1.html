@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>exercises</title>
+  <script>
+  // Log all odd numbers from 1 to 99, inclusive, to the console.
+  // Log all numbers on separate lines.
+
+  function log_odd_numbers() {
+    var num = 1
+    var limit = 99
+
+    for (num; num <= limit; num += 2) {
+      console.log(num);
+    }
+  }
+
+  // log_odd_numbers();
+
+  function log_even_numbers() {
+    var num = 1
+    var limit = 99
+
+    num += 1;
+    console.log(num);
+
+    for (num; num <= limit; num += 2) {
+      console.log(num);
+    }
+  }
+
+  // log_even_numbers();
+
+  //   Build a program that asks a user for the length and width of a room in
+  //   meters, and then logs to the console the area of the room in both square
+  //   meters and square feet.
+
+  // Note: 1 square meter == 10.7639 square feet
+
+  // Do not worry about validating the input at this time. Use the prompt()
+  // function to collect user input.
+
+  function area() {
+    var square_meter = 0;
+    var square_feet = 0;
+    const SQ_METER_TO_SQ_FEET = 10.7639;
+    var length = Number(prompt('Please enter the length of the room'));
+    var width = Number(prompt('Please enter the width of the room'));
+
+    square_meter = length * width;
+    square_feet = square_meter * SQ_METER_TO_SQ_FEET;
+
+    msg = 'The are of the room is ' + square_meter + ' square meters (' + square_feet + ' square feet).';
+    console.log(msg)
+  }
+
+  // area();
+
+
+  // Create a simple tip calculator. The program should prompt for a bill amount
+  // and a tip rate. The program must compute the tip, and then log both the tip
+  // and the total amount of the bill to the console. You can ignore input
+  // validation and assume that the user will put in numbers.
+
+  function tip() {
+    var result = 0;
+    var bill_amount = Number(prompt('Please enter the bill amount'));
+    var tip_rate = Number(prompt('Please enter the tip rate'));
+
+    tip = tip_rate * bill_amount / 100;
+    total = bill_amount + tip;
+
+    console.log('the tip is $' + tip);
+    console.log('the total is $' + total)
+  }
+  // tip();
+
+  //   Please enter an integer greater than 0: 5
+  // Enter "s" to compute the sum, or "p" to compute the product. s
+
+  // The sum of the integers between 1 and 5 is 15.
+  // Please enter an integer greater than 0: 6
+  // Enter "s" to compute the sum, or "p" to compute the product. p
+
+  // The product of the integers between 1 and 6 is 720.
+
+  function sumAll(limit) {
+    var num = 1;
+    var result = 0;
+    for (num; num <= limit; num++) {
+      result += num;
+    }
+    return result;
+  }
+
+  function factor(limit) {
+    var num = 1;
+    var result = 1;
+    for (num; num <= limit; num++) {
+      result *= num;
+    }
+    return result;
+  }
+
+  function sumOrProduct() {
+    var chosen_number = Number(prompt('Please enter an integer greater than 0'));
+    var sum_or_product = prompt('Please provide S for sum or P for product');
+
+    var result = 1;
+    var action = '';
+    var msg = '';
+
+    if (sum_or_product === 'S') {
+      action = 'sum';
+      result = sumAll(chosen_number);
+    } else if (sum_or_product === 'P') {
+      action = 'product';
+      result = factor(chosen_number);
+    }
+
+    msg = 'the ' + action + ' of the integers between 1 and ' + chosen_number + ' is ' + result;
+    console.log(msg);
+  }
+
+  // sumOrProduct();
+
+  function shortLongShort(first, second) {
+    var short;
+    var long;
+    if (first.length < second.length) {
+      short = first;
+      long = second;
+    } else if (first.length > second.length) {
+      short = second;
+      long = first;
+    }
+    return short + long + short;
+  }
+
+  // console.log(shortLongShort('abc', 'defgh'));    // "abcdefghabc"
+  // console.log(shortLongShort('abcde', 'fgh'));    // "fghabcdefgh"
+  // console.log(shortLongShort('', 'xyz'));         // "xyz"
+
+  // In the modern era under the Gregorian Calendar, leap years occur in every year
+  // that is evenly divisible by 4, unless the year is also divisible by 100. If
+  // the year is evenly divisible by 100, then it is not a leap year, unless the
+  // year is also evenly divisible by 400.
+  // Assume this rule is valid for any year greater than year 0. Write a function
+  // that takes any year greater than 0 as input, and returns true if the year is a
+  // leap year, or false if it is not a leap year.
+  function isLeapYear(year) {
+    if (year <= 1752) {
+      return year % 4 === 0;
+    } else {
+      return (year % 4 === 0 && year % 100 != 0) || (year % 100 === 0 && year % 400 === 0);
+    }
+  }
+
+  // console.log(2016, true, isLeapYear(2016)); // true
+  // console.log(2015, false, isLeapYear(2015)); // false
+  // console.log(2100, false, isLeapYear(2100)); // false
+  // console.log(2400, true, isLeapYear(2400)); // true
+  // console.log(240000, true, isLeapYear(240000)); // true
+  // console.log(240001, false, isLeapYear(240001)); // false
+  // console.log(2000, true, isLeapYear(2000)); // true
+  // console.log(1900, false, isLeapYear(1900)); // false
+  // console.log(1752, true, isLeapYear(1752)); // true
+  // console.log(1700, false, isLeapYear(1700)); // false
+  // console.log(1, false, isLeapYear(1)); // false
+  // console.log(100, false, isLeapYear(100)); // false
+  // console.log(400, true, isLeapYear(400)); // true
+
+  //   Write a function that computes the sum of all numbers between 1 and some
+  //   other number, inclusive, that are multiples of 3 or 5. For instance, if the
+  //   supplied number is 20, the result should be 98 (3 + 5 + 6 + 9 + 10 + 12 +
+  //   15 + 18 + 20).
+
+  // You may assume that the number passed in is an integer greater than 1.
+
+  // Examples:
+
+  function multisum(limit) {
+    var multiples = [];
+    var num = 1;
+
+    for (num; num <= limit; num++) {
+      if (num % 3 === 0 || num % 5 === 0) {
+        multiples.push(num)
+      }
+    }
+
+    var result = multiples.reduce((a, b) => a + b, 0);
+    return result;
+  }
+
+  // console.log(multisum(3)); // 3
+  // console.log(multisum(5)); // 8
+  // console.log(multisum(10)); // 33
+  // console.log(multisum(1000)); // 234168
+
+  // Write a function that determines and returns the ASCII string value of a
+  // string passed in as an argument. The ASCII string value is the sum of the
+  // ASCII values of every character in the string. (You may use
+  // String.prototype.charCodeAt() to determine the ASCII value of a character.)
+
+  function asciiValue(string) {
+    var values = [];
+    var index = 0;
+    for (index; index < string.length; index++) {
+        values.push(string.charCodeAt(index));
+    }
+    var result = values.reduce((a, b) => a + b, 0);
+    return result;
+  }
+
+  // console.log(asciiValue('Four score')); // 984
+  // console.log(asciiValue('Launch School')); // 1251
+  // console.log(asciiValue('a')); // 97
+  // console.log(asciiValue('')); // 0
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

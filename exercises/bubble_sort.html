@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>bubble sort</title>
+  <script>
+  // iterate on array with for (to be able to break)
+  // keep 2 elements from the index
+  // [array[i], array[i] + 1]
+  // compare them
+  // if i > i + 1 
+  // >>>>> array[i + 1] = array[i] et vice versa
+
+  // prévoir quand on arrive au bout de l'array
+  // conserver un booleen à false, et le remettre à true si swap
+
+
+  function bubbleSort(array) {
+    var swaps = 0;
+    var currentItem;
+    var nextItem;
+
+    for (var i = 0; i < array.length; i++) {
+      currentItem = array[i];
+      nextItem = array[i + 1];
+
+      if (currentItem > nextItem) {
+        array[i] = nextItem;
+        array[i + 1] = currentItem;
+        swaps += 1;
+      } 
+    }
+
+    if (swaps === 0) { 
+      return array; 
+    } else {
+      bubbleSort(array);
+    }
+  }
+
+  var array = [5, 3];
+  bubbleSort(array);
+  console.log(array); // [3, 5]
+
+  var array = [6, 2, 7, 1, 4];
+  bubbleSort(array);
+  console.log(array); // [1, 2, 4, 6, 7]
+
+  var array = ['Sue', 'Pete', 'Alice', 'Tyler', 'Rachel', 'Kim', 'Bonnie'];
+  bubbleSort(array);
+  console.log(array); // ["Alice", "Bonnie", "Kim", "Pete", "Rachel", "Sue", "Tyler"]
+  </script>
+</head>
+
+<body>
+  <h1>bubble sort</h1>
+</body>
+
+</html>

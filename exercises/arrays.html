@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>exercises</title>
+  <script>
+  var myArray = [1, 2, 3, 4];
+
+  function copy(array) {
+    var newArray = array.slice();
+    return newArray;
+  }
+
+  function anotherCopy(array) {
+    var newArray = [];
+
+    for (var i = 0; i < array.length; i++) {
+      newArray.push(array[i]);
+    }
+    return newArray;
+  }
+
+  function concatArrays(array_1, array_2) {
+    var newArray = [];
+    for (var i = 0; i < array_1.length; i++) {
+      newArray.push(array_1[i]);
+    }
+    for (var i = 0; i < array_2.length; i++) {
+      newArray.push(array_2[i]);
+    }
+    return newArray;
+  }
+
+
+  function concat(array1, secondArgument) {
+    var args = Array.prototype.slice.call(arguments);
+    var first_item = args.shift();
+    var second_item = args.shift();
+
+    if (Array.isArray(second_item)) {
+      args.unshift(concatArrays(first_item, second_item));
+    } else {
+      first_item.push(second_item);
+      args.unshift(first_item);
+    }
+
+    if (args.length > 1) {
+      return concat(args[0], args[1]);
+    }
+
+    return args;
+  }
+  // console.log(concat([1, 2, 3], [4, 5, 6], [7, 8, 9]));
+  // 
+
+
+  function push(array, value) {
+
+    var next = array.length
+
+    var args = Array.prototype.slice.call(arguments);
+    var values = args.slice(1, args.length);
+    for (var i = 0; i < values.length; i++) {
+      array[next] = values[i];
+      next++;
+    }
+    return array.length;
+  }
+
+  function pop(array) {
+    if (array.length === 0) return undefined;
+    var last = array[array.length - 1];
+    array.length -= 1;
+    return last;
+  }
+
+  var array = [1, 2, 3];
+
+
+  function reverseArray(array) {
+    reversed = [];
+    for (var i = array.length - 1; i >= 0; i--) {
+      reversed.push(array[i]);
+    }
+    return reversed;
+  }
+
+  function reverse(inputForReversal) {
+    if (Array.isArray(inputForReversal)) {
+      return reverseArray(inputForReversal);
+    } else {
+      return reverseArray(inputForReversal).join('');
+    }
+  }
+
+  function unshift(array, value) {
+    var last;
+    var args = Array.prototype.slice.call(arguments);
+    var values = args.slice(1, args.length);
+
+    values.forEach(function(item) {
+      for (var i = array.length; i > 0; i--) {
+        last = array[i - 1];
+        array[i] = last;
+      }
+      array[0] = item;
+    })
+
+    return array.length;
+  }
+
+  function shift(array) {
+    if (array.length === 0) return undefined;
+
+    var first = array[0];
+    for (var i = 0; i < array.length; i++) {
+      next = array[i + 1];
+      array[i] = next;
+    }
+    array.length = array.length - 1;
+    return first;
+  }
+
+
+  function slice(array, start, end) {
+    var new_array = [];
+    if (end > array.length) {
+      end = array.length;
+    }
+    for (start; start < end; start++) {
+      new_array.push(array[start]);
+    }
+    return new_array;
+  }
+
+
+
+  // The values of start and deleteCount will always
+  // be integers greater than or equal to 0.
+
+  // If the value of start is greater than the length of the array, 
+  // set it to equal the length.
+
+  // If the value of deleteCount is greater than the number of elements
+  // from start up to the end of the array, set deleteCount to the difference
+  // between the array's length and start.
+
+  // Takes optional arguments for elements to add to the array;
+  // denoted by the parameters element1 up to elementN.
+  // If no elements to add are provided, splice only removes elements from the array.
+
+
+
+  function splice(array, start, deleteCount, element1, elementN) {
+    // on récupère dans un array les valeurs à conserver à la fin (s'il y en a )
+
+    var keep_index;
+
+    if (deleteCount === 0) {
+      keep_index = 0
+    } else {
+      keep_index = array[start + deleteCount - 1] || array.length;
+    }
+
+    var kept_values = [];
+    var destroyed_values = [];
+    var args = Array.prototype.slice.call(arguments);
+    var valuesToAdd = args.slice(3, args.length);
+
+    for (var i = start; i < keep_index; i++) {
+      destroyed_values.push(array[i]);
+    }
+
+    for (keep_index; keep_index < array.length; keep_index++) {
+      kept_values.push(array[keep_index]);
+    }
+
+    array.length = start;
+
+    valuesToAdd.forEach(function(item) {
+      array.push(item);
+    })
+
+    while (kept_values.length > 0) {
+      array.push(shift(kept_values));
+    }
+
+    return destroyed_values;
+  }
+
+  function areArraysEqual(array1, array2) {
+    if (array1.length != array2.length) return false;
+
+    array1 = array1.slice().sort();
+    array2 = array2.slice().sort();
+
+    for(var i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) return false;
+    }
+    return true;
+  }
+
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

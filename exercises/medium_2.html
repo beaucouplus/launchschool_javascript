@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>medium 2</title>
+  <script>
+  // the percentage of characters in the string that are lowercase letters
+  // the percentage of characters that are uppercase letters
+  // the percentage of characters that are neither
+
+  function letterPercentages(string) {
+    // declare vars at 0 to handle each kind of percentage. Should be an object
+    // for each letter, define if is uppercase, lowercase or nothing 
+    // function getCase
+    // soit à partir d'un regex, soit à partir de 2 arrays (up / down) puis rien
+
+    var letterCase = { lowercase: 0, uppercase: 0, neither: 0 }
+
+    function addToCase(character) {
+      var ALPHA_UP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      var ALPHA_DOWN = ALPHA_UP.toLowerCase();
+
+      if (ALPHA_UP.includes(character)) {
+        letterCase.uppercase += 1;
+      } else if (ALPHA_DOWN.includes(character)) {
+        letterCase.lowercase += 1;
+      } else {
+        letterCase.neither += 1;
+      }
+    }
+
+    string.split('').forEach(function(char) {
+      addToCase(char);
+    })
+
+    for (key in letterCase) {
+      letterCase[key] = ((letterCase[key] / string.length) * 100).toFixed(2);
+    }
+
+    return letterCase;
+  }
+
+  // console.log(letterPercentages('abCdef 123'));
+  // // { lowercase: "50.00", uppercase: "10.00", neither: "40.00" }
+  // console.log(letterPercentages('AbCd +Ef'));
+  // // { lowercase: "37.50", uppercase: "37.50", neither: "25.00" }
+  // console.log(letterPercentages('123'));
+  // // { lowercase: "0.00", uppercase: "0.00", neither: "100.00" }
+
+  // A triangle is classified as follows:
+
+  // Equilateral: All three sides are of equal length.
+  // Isosceles: Two sides are of equal length, while the third is different.
+  // Scalene: All three sides are of different lengths.
+  // To be a valid triangle, the sum of the lengths of the two shortest sides must be
+  // greater than the length of the longest side, and every side must have a length greater than 0.
+  // If either of these conditions is not satisfied, the triangle is invalid.
+
+  // Write a function that takes the lengths of the three sides of a triangle as arguments,
+  // and returns one of the following four strings representing the triangle's
+  // classification: 'equilateral', 'isosceles', 'scalene', or 'invalid'.
+
+  // Examples:
+
+
+  function triangle(first, second, last) {
+    var sides = [first, second, last].sort((a, b) => a - b);
+
+    function equilateral(sides) {
+      return sides.every((a) => a === sides[0]);
+    }
+
+    function isosceles(sides) {
+      return sides[0] === sides[1] || sides[1] === sides[2];
+    }
+
+    function scalene(sides) {
+      return !equilateral(sides) && !isosceles(sides);
+    }
+
+    function invalid(sides) {
+      return sides.some(a => a === 0) || (sides[0] + sides[1]) < sides[2]
+    }
+
+    if (invalid(sides)) return 'invalid';
+    if (equilateral(sides)) return 'equilateral';
+    if (isosceles(sides)) return 'iscosceles';
+    if (scalene(sides)) return 'scalene';
+  }
+
+  // console.log(triangle(3, 3, 3), "equilateral"); // "equilateral"
+  // console.log(triangle(3, 3, 1.5), "isosceles"); // "isosceles"
+  // console.log(triangle(3, 4, 5), "scalene"); // "scalene"
+  // console.log(triangle(0, 3, 3), "invalid"); // "invalid"
+  // console.log(triangle(3, 1, 1), "invalid"); // "invalid"
+
+
+  // A triangle is classified as follows:
+
+// Right: One angle is a right angle (exactly 90 degrees).
+// Acute: All three angles are less than 90 degrees.
+// Obtuse: One angle is greater than 90 degrees.
+// To be a valid triangle, the sum of the angles must be exactly 180 degrees,
+// and every angle must be greater than 0. If either of these conditions is not satisfied,
+// the triangle is invalid.
+
+// Write a function that takes the three angles of a triangle as arguments,
+// and returns one of the following four strings representing the triangle's classification: 
+// 'right', 'acute', 'obtuse', or 'invalid'.
+
+  function triangleDeg(first, second, third) {
+    var angles = [first, second, third];
+    var NINETY_DEGREES = 90;
+
+    function acute(angles) {
+      return angles.every(x => x < NINETY_DEGREES);
+    }
+
+    function obtuse(angles) {
+      return angles.some(x => x > NINETY_DEGREES);
+    }
+
+    function right(angles) {
+      return angles.some(x => x === NINETY_DEGREES);
+    }
+
+    function invalid(angles) {
+      return angles.some(x => x === 0) || angles.reduce((acc, val) => acc + val) !== 180;
+    }
+
+    if (invalid(angles)) return 'invalid';
+    if (obtuse(angles)) return 'obtuse';
+    if (right(angles)) return 'right';
+    if (acute(angles)) return 'acute';
+  }
+
+
+  console.log(triangleDeg(60, 70, 50), "acute"); // "acute"
+  console.log(triangleDeg(30, 90, 60), 'right'); // "right"
+  console.log(triangleDeg(120, 50, 10), 'obtuse'); // "obtuse"
+  console.log(triangleDeg(0, 90, 90), 'invalid'); // "invalid"
+  console.log(triangleDeg(50, 50, 50), 'invalid'); // "invalid"
+  </script>
+</head>
+
+<body>
+  <h1>medium 2</h1>
+</body>
+
+</html>

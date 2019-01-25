@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>abcs</title>
+  <script>
+  // ['BO','XK','DQ','CP','NA','GT','RE','FS','JW','HU','VI','LY','ZM']
+
+  function isBlockWord(word) {
+    var COUPLES = ['BO', 'XK', 'DQ', 'CP', 'NA', 'GT', 'RE', 'FS', 'JW', 'HU', 'VI', 'LY', 'ZM'];
+    var letters = word.toUpperCase().split('');
+    var alreadyUsed = '';
+
+    var byLetter = function(couple) {
+      return couple.includes(letters[i]);
+    }
+
+    for (var i = 0; i < letters.length; i++) {
+      var found = COUPLES.find(byLetter);
+      if (alreadyUsed.includes(found)) return false;
+      alreadyUsed += found;
+    }
+
+    return true;
+  }
+
+  console.log(isBlockWord('BATCH')); // true
+  console.log(isBlockWord('BUTCH')); // false
+  console.log(isBlockWord('jest')); // true
+  console.log(isBlockWord('floW')); // true
+  console.log(isBlockWord('APPLE')); // false
+  console.log(isBlockWord('apple')); // false
+  console.log(isBlockWord('apPLE')); // false
+  console.log(isBlockWord('Box')); // false
+  </script>
+</head>
+
+<body>
+  <h1>abcs</h1>
+</body>
+
+</html>

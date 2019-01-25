@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>version numbers</title>
+  <script>
+  // 1
+  // 1.0
+  // 1.2
+  // 3.2.3
+  // 3.0.0
+  // 4.2.3.0
+
+  // 0.1 < 1 = 1.0 < 1.1 < 1.2 = 1.2.0.0 < 1.18.2 < 13.37
+
+  function compareVersions(version1, version2) {
+
+    function anyUnvalid(first, second) {
+      validChars = /^[0-9]+(\.[0-9]+)*$/;
+      return !validChars.test(first) || !validChars.test(second);
+    }
+
+    // if (version1.includes('..') || version2.includes('..')) return null;
+    if (anyUnvalid(version1, version2)) return null;
+
+    var toNumber = function(str) {
+      return Number(str);
+    }
+
+    var firstVersion = version1.split('.').map(toNumber);
+    var secondVersion = version2.split('.').map(toNumber);
+    var maxLength = Math.max(firstVersion.length, secondVersion.length);
+
+    for (var i = 0; i < maxLength; i++) {
+      if (firstVersion[i] === secondVersion[i]) continue;
+
+      if (firstVersion[i] > secondVersion[i]) {
+        return 1;
+      } else {
+        return -1;
+      }
+    }
+    return 0;
+  }
+
+  console.log(compareVersions('1.1.3', '3.4.5')); // -1
+  console.log(compareVersions('1.1.3', '1.1.4')); // -1
+  console.log(compareVersions('3.1.2', '3.1.1')); // 1
+  console.log(compareVersions('1.1', '1.1.1')); // -1
+  console.log(compareVersions('1.1.3', '3.4.5')); // -1
+  console.log(compareVersions('3', '2')); // 1
+
+
+  console.log(compareVersions('.1', '1'));           // null
+  console.log(compareVersions('1.', '2'));           // null
+  console.log(compareVersions('1.2...3', '3.4.8')); // null
+
+  console.log(compareVersions('1..3', '3.4.8')); // null
+  console.log(compareVersions('1.a', '3.4.8')); // null
+
+
+  console.log(compareVersions('1_be', '3.4.8')); // null
+  </script>
+</head>
+
+<body>
+  <h1>version numbers</h1>
+</body>
+
+</html>

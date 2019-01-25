@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>merge sorted lists</title>
+  <script>
+
+
+  function merge(first, second) {
+
+    var newArray = [];
+    var first = first.slice();
+    var second = second.slice();
+        
+    while (first.length > 0 && second.length > 0) {
+      if (first[0] <= second[0]) {
+        newArray.push(first.shift());
+      } else { 
+        newArray.push(second.shift());
+      }
+    }
+    return newArray.concat(first.length === 0 ? second : first);
+}
+
+  console.log(merge([1, 5, 9], [2, 6, 8])); // [1, 2, 5, 6, 8, 9]
+  console.log(merge([1, 1, 3], [2, 2])); // [1, 1, 2, 2, 3]
+  console.log(merge([], [1, 4, 5])); // [1, 4, 5]
+  console.log(merge([1, 4, 5], [])); // [1, 4, 5]
+  </script>
+</head>
+
+<body>
+  <h1>exercises</h1>
+</body>
+
+</html>

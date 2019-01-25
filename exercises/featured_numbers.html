@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>featured numbers</title>
+  <script>
+  // A 'featured number' (something unique to this exercise) is an 
+  // odd number that is a multiple of 7, 
+  // with all of its digits occuring exactly once each.
+  // For example, 49 is a featured number,
+  // but 98 is not (it is not odd), 97 is not (it is not a multiple of 7),
+  // and 133 is not (the digit 3 appears twice).
+
+  // number after the given number
+  // return error if no number >
+  // multiple of 7
+  // odd number
+  // different digits (each one appears once)
+
+
+  // verify each multiple
+  // if % 2 > false
+  // if digits appear more than once 
+  // false
+
+  // create an array of 0s from 0 to 9 than counts digits
+  // should be an every with condition <= 1
+
+
+  function featured(number) {
+    var nextMultipleOf7 = number + (7 - (number % 7));
+    var attempts = 0;
+
+    function validNumber(number) {
+      if (nextMultipleOf7 % 2 === 0) return false;
+      var digits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+      String(number).split('').forEach(function(num) {
+        digits[Number(num)] += 1;
+      })
+      if (digits.some(x => x > 1)) return false;
+      return true;
+    }
+
+    while (!validNumber(nextMultipleOf7)) {
+      attempts += 1;
+      if (attempts > 100000000) return 'Could not find featured number.'
+      nextMultipleOf7 += 7;
+    }
+
+    return nextMultipleOf7;
+
+  }
+
+
+  console.log(featured(12), 21); // 21
+  console.log(featured(20), 21); // 21
+  console.log(featured(21), 35); // 35
+  console.log(featured(997), 1029); // 1029
+  console.log(featured(1029), 1043); // 1043
+  console.log(featured(999999), 1023547); // 1023547
+  console.log(featured(999999987), 1023456987); // 1023456987
+  </script>
+</head>
+
+<body>
+  <h1>featured numbers</h1>
+</body>
+
+</html>
